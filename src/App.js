@@ -8,6 +8,7 @@ import { useState } from "react";
 import CreateAccount from "./components/CreateAccount";
 import Product from "./components/Product";
 import Card from "./components/Card";
+import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -26,6 +27,8 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<CreateAccount />}></Route>
         <Route path="/product" element={<Product />}></Route>
+        <Route path="/checkout" element={<CheckoutPage />}></Route>
+
       </Routes>
       </div>
   );

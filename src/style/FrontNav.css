@@ -1,0 +1,49 @@
+.front__Nav {
+  position: sticky;
+  top: 0%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(54, 53, 53, 0.753);
+  justify-content: space-between;
+  height: 60px;
+  color: aliceblue;
+  z-index: 100;
+  opacity: 1;
+}
+.header__Nav {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.font__Logo {
+  width: 100px;
+  height: 50px;
+  object-fit: contain;
+  margin: 2px 20px;
+  cursor: pointer;
+}
+.nav__Options {
+  align-items: center;
+  padding: 20px;
+}
+.header_Basket {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.add__Basket{
+
+  padding: 5px;
+  color: antiquewhite;
+  background-color: rgb(19, 19, 78);
+  width: 50%;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  margin: 10px 0 ;
+  cursor: pointer;
+}
+.add__Basket:hover{
+  color: white;
+}

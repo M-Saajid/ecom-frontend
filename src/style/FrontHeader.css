@@ -1,0 +1,28 @@
+.auth__Header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  background-color: rgb(1, 1, 26);
+  color: rgba(255, 255, 255, 0.836);
+  height: 30px;
+  justify-content: space-between;
+  z-index: 100;
+}
+.auth__Option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.Signin {
+  padding: 20px;
+  font-size: small;
+}
+.create__Account {
+  padding: 20px;
+  font-size: small;
+}
+.auth__Header > h4 {
+  margin: 20px;
+  cursor: pointer;
+  margin-left: 45px;
+}

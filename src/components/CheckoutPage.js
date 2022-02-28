@@ -2,23 +2,43 @@ import React from "react";
 import "../style/Checkout.css";
 import CheckoutProduct from "./CheckoutProduct";
 import Subtotal from "./Subtotal";
+import { useStateValue } from "./StateProvider";
 
 function CheckoutPage() {
+  const [{ basket }] = useStateValue();
+
   return (
     <div className="checkout">
       <div className="checkout__left">
         <div>
           <h3>Hello</h3>
-          <h2 className="checkout__title">Your shopping Basket</h2>
-          <CheckoutProduct />
-          <CheckoutProduct />
-
-          <CheckoutProduct />
-          <CheckoutProduct />
-
-      
-
-
+          {basket?.length === 0 ? (
+            <div>
+              <h2 className="checkout__title">
+                Your shopping Basket Is Empty{" "}
+              </h2>
+              <p>
+                You have no product in the cart ,Please add to cart by clicking
+                "ADD TO BASKET" button in the collection{" "}
+              </p>
+            </div>
+          ) : (
+            <div>
+              <h2 className="checkout__title">Your shopping Basket</h2>
+              {basket.map((item) => (
+                <CheckoutProduct
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.image}
+                  price={item.price}
+                  rating={item.rating}
+                  description={item.description}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

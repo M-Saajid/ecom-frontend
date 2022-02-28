@@ -7,8 +7,9 @@ import Login from "./components/Login";
 import { useState } from "react";
 import CreateAccount from "./components/CreateAccount";
 import Product from "./components/Product";
-import Card from "./components/Card";
 import CheckoutPage from "./components/CheckoutPage";
+import Admin from "./components/Admin";
+import AdminItems from "./components/AdminItems";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -28,6 +29,10 @@ function App() {
         <Route path="/register" element={<CreateAccount />}></Route>
         <Route path="/product" element={<Product />}></Route>
         <Route path="/checkout" element={<CheckoutPage />}></Route>
+        <Route path="/adminadd" element={<Admin />}></Route>
+        <Route path="/addminview" element={<AdminItems />}></Route>
+
+
 
       </Routes>
       </div>

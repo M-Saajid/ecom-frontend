@@ -7,7 +7,7 @@ function Product() {
   const [itemDetail, setitemDetail] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get("http://localhost:5000/items/post");
+      const request = await axios.get("http://localhost:5000/api/items");
       setitemDetail(request.data.data.foundItems);
       return request;
     }
@@ -21,6 +21,7 @@ function Product() {
         return (
           <Card
             key={c._id}
+            id={c._id}
             image={c.image}
             title={c.title}
             description={c.description}

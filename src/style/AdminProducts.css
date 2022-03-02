@@ -1,0 +1,68 @@
+.admin__Container {
+  /* border: 2px solid black; */
+  padding: 10px;
+  width: auto;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: auto;
+  margin-top: 25px;
+  box-shadow: 1px 2px 3px 5px rgba(190, 189, 194, 0.836),
+    0 3px 3px 0 rgb(49, 66, 141);
+}
+.adminProduct{
+  transition: 5s;
+}
+.Card__Logo > img {
+  height: 200px;
+  width: 100%;
+}
+.Card__Description {
+  text-align: left;
+  color: rgb(78, 77, 75);
+  padding: 2px;
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+.Card__Detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px;
+}
+.price {
+  margin-bottom: 5px;
+  padding: 2px;
+}
+.rating {
+  font-size: medium;
+  padding-bottom: 2px;
+}
+.Card__button {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  /* border: 2px solid black; */
+  margin-left: auto;
+  margin-right: auto;
+}
+.Card__button > button {
+  margin: 10px;
+  width: 80px;
+  height: 25px;
+  border: none;
+  color: whitesmoke;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: rgba(18, 18, 77, 0.726);
+}
+.Card__button > button:hover {
+  color: antiquewhite;
+  box-shadow: 1px 2px 3px 5px rgba(190, 189, 194, 0.836),
+    0 3px 3px 0 rgb(49, 66, 141);
+}
+.adminProduct> :hover{
+  transform: scale(1.1);
+}

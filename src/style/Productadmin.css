@@ -1,0 +1,33 @@
+.Product__Container{
+    height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+.Header__row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    border: 1px solid black;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+}
+.items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 5%;
+    margin-right: 10%;
+    padding: 10px;
+
+
+}
+.items__Image>img{
+    width: 100px;
+    height: 150px;
+}
+.items__Image{
+    border: 1px solid black;
+}

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../style/Admin.css";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 function Admin() {
+  const navigate = useNavigate();
   const [details, setDetails] = useState({
     title: " ",
     price: " ",
@@ -37,8 +40,10 @@ function Admin() {
       const response = await axios.post(
         "http://localhost:5000/api/items",
         data
+       
       );
       console.log(response);
+      navigate("/addminview")
     } catch (error) {
       console.log(error);
     }

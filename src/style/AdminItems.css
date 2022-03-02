@@ -1,0 +1,30 @@
+.admin {
+  width: auto;
+  height: 100vh;
+}
+.admin__ContainerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  /* border: 1px solid black; */
+}
+.add_items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 25px;
+}
+.add_items > p {
+  padding: 20px;
+  font-weight: 500;
+}
+.admin__ProductTable{
+
+width: auto;
+display: flex;
+height: max-content;
+flex-direction: row;
+flex-wrap: wrap;
+}
+

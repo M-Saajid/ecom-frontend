@@ -41,7 +41,6 @@ function Admin() {
       const response = await axios.post(
         "http://localhost:5000/api/items",
         data
-       
       );
       console.log(response);
       navigate("/addminview")

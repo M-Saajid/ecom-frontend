@@ -21,15 +21,13 @@ function AdminItems() {
     }
     fetchData();
   }, []);
-  console.log(itemDetail);
-
   return (
     <div className="admin">
       <div className="admin__ContainerHeader">
         <h2>All Products</h2>
         <div className="add_items">
           <p>Add Items</p>
-          <NavLink  to="/adminadd">
+          <NavLink to="/adminadd">
             <Fab size="small" color="black" aria-label="add">
               <AddIcon />
             </Fab>
@@ -49,6 +47,7 @@ function AdminItems() {
               price={c.price}
               rating={c.rating}
               category={c.category}
+              quantity={c.quantity}
             />
           );
         })}

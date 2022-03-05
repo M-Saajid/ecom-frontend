@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 
 function AdminProduct(props) {
-  const [{ basket,update }, dispatch] = useStateValue();
+  const [{ basket, updateBucket }, dispatch] = useStateValue();
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = "http://localhost:5000/" + imageArray[1];
@@ -22,8 +22,17 @@ function AdminProduct(props) {
   };
   const UpdateItem = () => {
     dispatch({
-      type: "UPDATES",
-      id: props.id
+      type: "ADD_TO_UPDATES",
+      item: {
+        id: props.id,
+        title: props.title,
+        image: props.image,
+        price: props.price,
+        rating: props.rating,
+        description: props.description,
+        quantity: props.quantity,
+        category: props.category
+      }
     });
   };
 

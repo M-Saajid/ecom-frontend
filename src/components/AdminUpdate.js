@@ -2,20 +2,24 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../style/AdminUpdate.css";
 import { useStateValue } from "./StateProvider";
+import { NavLink } from "react-router-dom";
 
 function AdminUpdate() {
-  const [{ basket, update }] = useStateValue();
-  console.log(update);
-  const [details, setDetails] = useState({
-    title: " ",
-    price: " ",
-    desc: " ",
-    rating: " ",
-    quantity: " ",
-    category: " "
-  });
+  let userData = {};
+  const [{ basket, updateBucket }] = useStateValue();
+  const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
-
+  //set the detail object into specifc updating item
+  const [details, setDetails] = useState({
+    title: updateBucketItem.title,
+    price: updateBucketItem.price,
+    desc: updateBucketItem.description,
+    rating: updateBucketItem.rating,
+    quantity: updateBucketItem.quantity,
+    category: updateBucketItem.category,
+    image: updateBucketItem.image
+  });
+  //onchange event handling
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {
@@ -25,15 +29,25 @@ function AdminUpdate() {
       };
     });
   };
+  //sending datas to api endpoint
   const send = async (e) => {
     e.preventDefault();
-    console.log("this is details price", details.price);
+    const data = new FormData();
+    data.append("productImage", files);
+    //converting form data into json
+    data.forEach(function (value, key) {
+      userData[key] = value;
+    });
+
+    console.log("this is details of image", details);
+    console.log("this is details of form data", userData);
+
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/items/${update}`,
-        { details }
+        `http://localhost:5000/api/items/${updateBucketItem.id}`,
+        details
       );
-      console.log(response);
+      console.log("this is api response ", response);
     } catch (error) {
       console.log(error);
     }
@@ -116,13 +130,15 @@ function AdminUpdate() {
               placeholder="Enter the Title"
               onChange={(event) => {
                 const file = event.target.files[0];
-                // setFiles(file);
+                setFiles(file);
               }}
             />
           </div>
-          <button type="submit" onClick={send}>
-            update
-          </button>
+          <NavLink to="/addminview">
+            <button type="submit" onClick={send}>
+              update
+            </button>
+          </NavLink>
         </form>
       </div>
       <div className="upadate__Right"></div>

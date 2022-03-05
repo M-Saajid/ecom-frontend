@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import "../style/Admin.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "../style/AdminUpdate.css";
+import { useStateValue } from "./StateProvider";
 
-function Admin() {
-  const navigate = useNavigate();
+function AdminUpdate() {
+  const [{ basket, update }] = useStateValue();
+  console.log(update);
   const [details, setDetails] = useState({
     title: " ",
     price: " ",
@@ -24,34 +25,22 @@ function Admin() {
       };
     });
   };
-
   const send = async (e) => {
     e.preventDefault();
-    console.log("this is the state hooks", files);
-    const data = new FormData();
-    data.append("title", details.title);
-    data.append("description", details.desc);
-    data.append("price", details.price);
-    data.append("rating", details.rating);
-    data.append("quantity", details.quantity);
-    data.append("category", details.category);
-    data.append("productImage", files);
+    console.log("this is details price", details.price);
     try {
-      console.log("this is data ",data)
-      const response = await axios.post(
-        "http://localhost:5000/api/items",
-        data
-       
+      const response = await axios.patch(
+        `http://localhost:5000/api/items/${update}`,
+        { details }
       );
       console.log(response);
-      navigate("/addminview")
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="admin">
-      <div className="admin__component">
+    <div className="admin__Update">
+      <div className="update__Left">
         <h2>Add products</h2>
         <form className="admin__form">
           <div className="admin__detail">
@@ -127,17 +116,18 @@ function Admin() {
               placeholder="Enter the Title"
               onChange={(event) => {
                 const file = event.target.files[0];
-                setFiles(file);
+                // setFiles(file);
               }}
             />
           </div>
           <button type="submit" onClick={send}>
-            Submit
+            update
           </button>
         </form>
       </div>
+      <div className="upadate__Right"></div>
     </div>
   );
 }
 
-export default Admin;
+export default AdminUpdate;

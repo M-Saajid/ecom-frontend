@@ -1,0 +1,16 @@
+.admin__Update{
+    width: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+.update__Left{
+    border: 1px solid black;
+    width: 50%;
+}
+.AdminCard__Container{
+    border: 1px solid black;
+    margin-left: 20%;
+  
+}

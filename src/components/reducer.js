@@ -1,6 +1,9 @@
 export const initialState = {
-  basket: []
+  basket: [],
+  update:" "
 };
+
+
 
 export const Baskettotal = (basket) =>
   basket?.reduce((amount, item) => item.price + amount, 0);
@@ -25,7 +28,9 @@ function reducer(state, action) {
         );
       }
       return { ...state, basket: newbasket };
-
+      case "UPDATES":
+       
+        return{...state, update: action.id}
     default:
       return state;
   }

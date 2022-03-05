@@ -1,7 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../style/AdminProducts.css";
+import { NavLink } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
+
 function AdminProduct(props) {
+  const [{ basket,update }, dispatch] = useStateValue();
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = "http://localhost:5000/" + imageArray[1];
@@ -15,6 +19,12 @@ function AdminProduct(props) {
     } catch (error) {
       console.log(error);
     }
+  };
+  const UpdateItem = () => {
+    dispatch({
+      type: "UPDATES",
+      id: props.id
+    });
   };
 
   return (
@@ -40,7 +50,9 @@ function AdminProduct(props) {
           </p>
         </div>
         <div className="Card__button">
-          <button>Update</button>
+          <NavLink to="/addminUpdate">
+            <button onClick={UpdateItem}>Update</button>
+          </NavLink>
           <button onClick={DeleteItem}>Delete</button>
         </div>
       </div>

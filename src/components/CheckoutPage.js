@@ -32,7 +32,6 @@ function CheckoutPage() {
                   title={item.title}
                   price={item.price}
                   image={item.image}
-                  price={item.price}
                   rating={item.rating}
                   description={item.description}
                 />

@@ -11,6 +11,7 @@ import CheckoutPage from "./components/CheckoutPage";
 import Admin from "./components/Admin";
 import AdminItems from "./components/AdminItems";
 import history from "./components/history";
+import AdminUpdate from "./components/AdminUpdate";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -33,6 +34,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />}></Route>
           <Route path="/adminadd" element={<Admin />}></Route>
           <Route path="/addminview" element={<AdminItems />}></Route>
+          <Route path="/addminUpdate" element={<AdminUpdate />}></Route>
         </Routes>
 
     </div>

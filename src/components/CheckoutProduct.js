@@ -4,8 +4,6 @@ import { useStateValue } from "./StateProvider";
 
 function CheckoutProduct(props) {
   const [{ basket }, dispatch] = useStateValue();
-  console.log("this is props ", props);
-
   const removeItems = () => {
     dispatch({
       type: "REMOVE_FROM_BASKET",

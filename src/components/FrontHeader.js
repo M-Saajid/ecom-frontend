@@ -10,7 +10,6 @@ function FrontHeader() {
         : "rgba(255, 255, 255, 0.836)"
     };
   };
-
   return (
     <div className="auth__Header">
       <h4>ABAEC </h4>

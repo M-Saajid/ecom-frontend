@@ -3,7 +3,7 @@ import "../style/Card.css";
 import { useStateValue } from "./StateProvider";
 
 function Card(props) {
-  const [{ }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const addToBasket = () => {
     dispatch({

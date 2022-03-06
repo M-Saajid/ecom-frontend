@@ -17,14 +17,13 @@ function FrontNav() {
   };
   return (
     <div className="front__Nav">
-     <NavLink style={navLink} to="/">
-     <img
-        className="font__Logo"
-        src="https://seeklogo.com/images/P/phoenix-bird-logo-78F2C24DA2-seeklogo.com.png"
-        alt="/"
-      />
-          </NavLink>
-     
+      <NavLink style={navLink} to="/">
+        <img
+          className="font__Logo"
+          src="https://seeklogo.com/images/P/phoenix-bird-logo-78F2C24DA2-seeklogo.com.png"
+          alt="/"
+        />
+      </NavLink>
       <div className="header__Nav">
         <div className="nav__Options">
           <span className="option_One">Women</span>
@@ -36,7 +35,6 @@ function FrontNav() {
           <span className="option_Thre">Accesories</span>
         </div>
       </div>
-
       <div className="header_Basket">
         <NavLink style={navLink} to="/checkout">
           <ShoppingBasketIcon />

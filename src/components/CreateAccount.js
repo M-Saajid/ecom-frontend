@@ -1,5 +1,5 @@
-import React from 'react'
-import "../style/CreateAccount.css"
+import React from "react";
+import "../style/CreateAccount.css";
 function CreateAccount() {
   return (
     <div className="register">
@@ -13,11 +13,10 @@ function CreateAccount() {
           <input type="text" placeholder="Enter the Email"></input>
           <input type="password" placeholder="Enter the password"></input>
           <button className="Signin">Register</button>
-
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CreateAccount
+export default CreateAccount;

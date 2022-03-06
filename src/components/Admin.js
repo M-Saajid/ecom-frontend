@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../style/Admin.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ function Admin() {
     category: " "
   });
   const [files, setFiles] = useState();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {
@@ -37,13 +36,13 @@ function Admin() {
     data.append("category", details.category);
     data.append("productImage", files);
     try {
-      console.log("this is data ",data)
+      console.log("this is data ", data);
       const response = await axios.post(
         "http://localhost:5000/api/items",
         data
       );
       console.log(response);
-      navigate("/addminview")
+      navigate("/addminview");
     } catch (error) {
       console.log(error);
     }

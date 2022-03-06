@@ -4,6 +4,7 @@ import "../style/FrontNav.css";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 
+
 function FrontNav() {
   const [{ basket }] = useStateValue();
   console.log(basket);

@@ -11,6 +11,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "ADD_TO_BASKET":
       return { ...state, basket: [...state.basket, action.item] };
+    case "EMPTY_BASKET":
+      return { ...state, basket: [] };
 
     case "REMOVE_FROM_BASKET":
       let newbasket = [...state.basket];
@@ -27,7 +29,7 @@ function reducer(state, action) {
       }
       return { ...state, basket: newbasket };
     case "ADD_TO_UPDATES":
-      return {  updateBucket: [action.item] };
+      return { updateBucket: [action.item] };
     default:
       return state;
   }

@@ -8,9 +8,9 @@ import CheckoutProduct from "./CheckoutProduct";
 import { Baskettotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router";
 
 function Payment() {
+  const navigate = useNavigate();
   const [{ basket }, dispatch] = useStateValue();
   const stripe = useStripe();
   const elements = useElements();
@@ -23,13 +23,13 @@ function Payment() {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {
       const response = await axios.post(
-        `/payment/create?total=${Baskettotal(basket) * 100}`
+        `http://localhost:5000/payment/create?total=${Baskettotal(basket)}`
       );
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
   }, [basket]);
-
+  console.log("Client Secret is >>>", clientSecret);
   const handleSubmit = async (event) => {
     //stripe
     event.preventDefault();
@@ -45,7 +45,10 @@ function Payment() {
         setSucceeded(true);
         setError(null);
         setProcessingd(false);
-        Navigate("/");
+        dispatch({
+          type: "EMPTY_BASKET"
+        });
+        navigate("/product");
       });
   };
   const handleChange = (event) => {

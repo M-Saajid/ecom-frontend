@@ -1,6 +1,7 @@
 export const initialState = {
   basket: [],
-  updateBucket: []
+  updateBucket: [],
+  searchBucket:[]
 };
 
 export const Baskettotal = (basket) =>
@@ -30,6 +31,8 @@ function reducer(state, action) {
       return { ...state, basket: newbasket };
     case "ADD_TO_UPDATES":
       return { updateBucket: [action.item] };
+    case "SEARCH":
+      return {  ...state, searchBucket: [...state.searchBucket, action.item] };
     default:
       return state;
   }

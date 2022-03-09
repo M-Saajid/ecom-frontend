@@ -1,0 +1,14 @@
+.search{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+   
+}
+.search__Text{
+    width: 100%;
+    text-align: center;
+
+}
+.icon-material-u-i:hover{
+    color: rgb(59, 65, 65);
+  }

@@ -26,6 +26,10 @@
   align-items: center;
   padding: 20px;
 }
+.Search{
+  /* width: 50%; */
+}
+
 .header_Basket {
   padding: 20px;
   display: flex;

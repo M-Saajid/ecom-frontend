@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../style/Product.css";
 import Card from "./Card";
+import Search from "./Search";
 
 function Product() {
+  
   const [itemDetail, setitemDetail] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +32,6 @@ function Product() {
           />
         );
       })}
-      
     </div>
   );
 }

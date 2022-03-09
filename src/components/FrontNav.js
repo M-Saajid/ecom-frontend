@@ -3,7 +3,7 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import "../style/FrontNav.css";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-
+import Search from "./Search";
 
 function FrontNav() {
   const [{ basket }] = useStateValue();
@@ -36,6 +36,7 @@ function FrontNav() {
           <span className="option_Thre">Accesories</span>
         </div>
       </div>
+
       <div className="header_Basket">
         <NavLink style={navLink} to="/checkout">
           <ShoppingBasketIcon />

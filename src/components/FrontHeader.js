@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../style/FrontHeader.css";
+
+import Search from "./Search";
 function FrontHeader() {
   const navLink = ({ isActive }) => {
     return {
@@ -13,6 +15,9 @@ function FrontHeader() {
   return (
     <div className="auth__Header">
       <h4>ABAEC </h4>
+      <div className="Search">
+        <Search/>
+      </div>
       <div className="auth__Option">
         <div className="Signin">
           <NavLink style={navLink} to="/login">

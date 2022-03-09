@@ -28,7 +28,7 @@ function Payment() {
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
-  }, [basket]);
+  }, []);
   console.log("Client Secret is >>>", clientSecret);
   const handleSubmit = async (event) => {
     //stripe

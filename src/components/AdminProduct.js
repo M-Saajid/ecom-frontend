@@ -40,13 +40,13 @@ function AdminProduct(props) {
     <div className="adminProduct">
       <div className="admin__Container">
         <div className="Card__Logo">
+          <p className="brand__titles">{props.title}</p>
           <img src={imageUrl} alt=" not found" />
         </div>
         <div className="Card__Description">
-          <p>{props.description}</p>
-        </div>
-        <div className="Card__Description">
-          <p>{props.category}</p>
+          <p>
+            {props.description} <br></br>Available <b> {props.quantity} PCS</b>{" "}
+          </p>
         </div>
         <div className="Card__Detail">
           <h4 className="price">LKR {props.price}</h4>
@@ -60,9 +60,13 @@ function AdminProduct(props) {
         </div>
         <div className="Card__button">
           <NavLink to="/addminUpdate">
-            <button onClick={UpdateItem}>Update</button>
+            <button className="admin__btn" onClick={UpdateItem}>
+              Update
+            </button>
           </NavLink>
-          <button onClick={DeleteItem}>Delete</button>
+          <button className="admin__btn" onClick={DeleteItem}>
+            Delete
+          </button>
         </div>
       </div>
     </div>

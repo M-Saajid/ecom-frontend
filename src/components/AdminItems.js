@@ -16,7 +16,7 @@ function AdminItems() {
         setitemDetail(request.data.data.foundItems);
         return request;
       } catch (error) {
-        // send( new Error (error.message))
+        console.log(error);
       }
     }
     fetchData();

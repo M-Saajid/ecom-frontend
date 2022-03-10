@@ -29,6 +29,7 @@ function Product() {
             description={c.description}
             price={c.price}
             rating={c.rating}
+            quantity={c.quantity}
           />
         );
       })}

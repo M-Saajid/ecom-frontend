@@ -14,7 +14,8 @@ function Card(props) {
         image: props.image,
         price: props.price,
         rating: props.rating,
-        description: props.description
+        description: props.description,
+        quantity:props.quantity
       }
     });
   };
@@ -26,10 +27,11 @@ function Card(props) {
   return (
     <div className="Card__Container">
       <div className="Card__Logo">
+      <p className="brand__titles">{props.title}</p>
         <img src={imageUrl} alt=" not found" />
       </div>
       <div className="Card__Description">
-        <p>{props.description}</p>
+        <p>{props.description} <br></br>we have only  <b> {props.quantity} PCS</b> </p>
       </div>
       <div className="Card__Detail">
         <h4 className="price">LKR {props.price}</h4>

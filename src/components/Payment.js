@@ -34,22 +34,26 @@ function Payment() {
     //stripe
     event.preventDefault();
     setProcessingd(true);
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
+    try {
+      const payload = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)
         }
-      })
-      .then(({ paymentIntent }) => {
-        // paymentIntent is paymentconfirmation
-        setSucceeded(true);
-        setError(null);
-        setProcessingd(false);
-        dispatch({
-          type: "EMPTY_BASKET"
-        });
-        navigate("/product");
       });
+      setSucceeded(true);
+      setError(null);
+      setProcessingd(false);
+      const response = await axios.post("http://localhost:5000/api/mail", {
+        price: Baskettotal(basket)
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    dispatch({
+      type: "EMPTY_BASKET"
+    });
+    navigate("/product");
   };
   const handleChange = (event) => {
     //display error when customer type their card details

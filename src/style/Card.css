@@ -12,9 +12,14 @@
   box-shadow: 1px 2px 3px 5px rgba(190, 189, 194, 0.836),
     0 3px 3px 0 rgb(49, 66, 141);
 }
-.Card__Logo>img{
+.Card__Logo > img {
   height: 200px;
   width: 100%;
+}
+.brand__titles {
+  text-align: center;
+  font-weight: 800;
+  padding: 15px;
 }
 .Card__Container:hover {
   transform: scale(1.1);

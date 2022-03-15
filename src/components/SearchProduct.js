@@ -3,10 +3,12 @@ import Card from "./Card";
 import { useStateValue } from "./StateProvider";
 
 function SearchProduct() {
-  const [{searchBucket }] = useStateValue();
-  console.log("search state ", searchBucket)
+  const [{ searchBucket }] = useStateValue();
+  console.log("search state ", searchBucket);
   return (
+    // view all search products
     <div className="Product">
+    {/* pass all searched items to card element  */}
       {searchBucket.map((c) => {
         return (
           <Card
@@ -20,7 +22,6 @@ function SearchProduct() {
           />
         );
       })}
-      
     </div>
   );
 }

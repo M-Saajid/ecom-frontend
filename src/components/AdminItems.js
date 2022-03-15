@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import "../style/AdminItems.css";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import ItemTable from "./ItemTable";
 import AdminProduct from "./AdminProduct";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import baseUrl from "../components/url";
 
 function AdminItems() {
   const [itemDetail, setitemDetail] = useState([]);
+  // fetch all items
   useEffect(() => {
     async function fetchData() {
       try {
-        const request = await axios.get("http://localhost:5000/api/items");
+        const request = await axios.get(`${baseUrl}/api/items`);
         setitemDetail(request.data.data.foundItems);
         return request;
       } catch (error) {
@@ -35,7 +36,7 @@ function AdminItems() {
         </div>
       </div>
       <div className="admin__ProductTable">
-        {/* <ItemTable /> */}
+        {/* view all items to admin  */}
         {itemDetail.map((c) => {
           return (
             <AdminProduct

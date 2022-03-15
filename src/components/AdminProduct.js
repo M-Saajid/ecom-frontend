@@ -3,23 +3,27 @@ import React from "react";
 import "../style/AdminProducts.css";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
+import baseUrl from "../components/url";
 
 function AdminProduct(props) {
   const [{ basket, updateBucket }, dispatch] = useStateValue();
+  // replacing file "\\" into "//" in image path
   const fileUrl = props.image.replace(/\\/g, "/");
+  // split all th "/" get the image into array
   const imageArray = fileUrl.split("/");
-  const imageUrl = "http://localhost:5000/" + imageArray[1];
+  //accessing the image array and adding to base url to get the image
+  const imageUrl = `${baseUrl}/${imageArray[1]}`;
+  //deleteing the item from admin dashboard
   const DeleteItem = async () => {
     try {
-      const response = await axios.delete(
-        "http://localhost:5000/api/items/" + props.id
-      );
+      const response = await axios.delete(`${baseUrl}/api/items/${props.id}`);
       console.log(response);
       window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
+  //upload the item to reducer so admin can update the specific from the update ui
   const UpdateItem = () => {
     dispatch({
       type: "ADD_TO_UPDATES",

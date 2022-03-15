@@ -1,6 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import "../style/CreateAccount.css";
+import { useNavigate } from "react-router-dom";
+import baseUrl from "./url";
 function CreateAccount() {
+  const navigate = useNavigate();
+  const [details, setDetails] = useState();
+  //onhandling the  input values
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  };
+  // register the user  and navigate to the products
+  const handleSubmit = async (e) => {
+    try {
+      const response = await axios.post(`${baseUrl}/register`, {
+        username: details.username,
+        email: details.email,
+        password: details.password
+      });
+      navigate("/product");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="register">
       <div className="register__Banner">
@@ -10,9 +38,27 @@ function CreateAccount() {
           alt="/"
         />
         <div className="register__Container">
-          <input type="text" placeholder="Enter the Email"></input>
-          <input type="password" placeholder="Enter the password"></input>
-          <button className="Signin">Register</button>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="username"
+            placeholder="Enter the username"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="email"
+            placeholder="Enter the Email"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="password"
+            name="password"
+            placeholder="Enter the password"
+          ></input>
+          <button type="submit" onClick={handleSubmit} className="Signin">
+            Register
+          </button>
         </div>
       </div>
     </div>

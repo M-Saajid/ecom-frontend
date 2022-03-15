@@ -20,18 +20,10 @@ const promise = loadStripe(
 );
 
 function App() {
-  const [user, setUser] = useState(false);
   return (
     <div className="App">
-      {user ? (
-        <FrontHeader user={user} />
-      ) : (
-        <>
-          <FrontHeader user={user} />
-          <FrontNav />
-        </>
-      )}
-
+      <FrontHeader />
+      <FrontNav />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
@@ -42,7 +34,6 @@ function App() {
         <Route path="/addminview" element={<AdminItems />}></Route>
         <Route path="/addminUpdate" element={<AdminUpdate />}></Route>
         <Route path="/searchproduct" element={<SearchProduct />}></Route>
-
         <Route
           path="/payment"
           element={

@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import "../style/Search.css";
 import axios from "axios";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "./url";
 
 function Search() {
   const navigate = useNavigate();
   const [search, setSearch] = useState(" ");
   const [searchResults, setSearcResults] = useState([]);
-  const [{ basket, updateBucket }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const handleChange = (event) => {
     setSearch(event.target.value);
   };
   const send = (req, res) => {
-    
+    // getting the all items where user search for
     const searchHandle = async () => {
-        
       try {
-        const result = await axios.post("http://localhost:5000/api/search", {
+        const result = await axios.post(`${baseUrl}/api/search`, {
           title: search
         });
+        // updating all the user prefer items to usestate
         setSearcResults(result.data.data);
-        // console.log("this is search result",searchResults.foundItems[0].title);
       } catch (error) {
         console.log("this is the error", error);
       }
+      // check where user has search or not
       if (searchResults.length != 0) {
         {
+          //dispatch all the items to the reducer
           searchResults.foundItems.map((items) => {
-            console.log("this is items ", items);
+            console.log("this is searched items ", items);
             dispatch({
               type: "SEARCH",
               item: {
@@ -44,14 +46,12 @@ function Search() {
             });
           });
         }
-        setSearch("")
+        setSearch("");
         navigate("/searchproduct");
-        
       }
     };
 
     searchHandle();
-    
   };
   return (
     <div className="search">

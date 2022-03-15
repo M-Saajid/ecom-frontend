@@ -3,11 +3,10 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import "../style/FrontNav.css";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-import Search from "./Search";
 
 function FrontNav() {
   const [{ basket }] = useStateValue();
-  console.log(basket);
+  //remove the underline where represent as link
   const navLink = ({ isActive }) => {
     return {
       textDecoration: isActive ? "none" : "none",

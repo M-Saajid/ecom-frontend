@@ -6,8 +6,16 @@ import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
 
 function Subtotal() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }] = useStateValue();
   const navigate = useNavigate();
+  // check weather user exsist before proceeding to payment
+  const userExist = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/payment");
+    }
+  };
   return (
     <div className="subtotal">
       <CurrencyFormat
@@ -28,13 +36,7 @@ function Subtotal() {
         prefix={"LKR "}
       />
 
-      <button
-        onClick={(e) => {
-          navigate("/payment");
-        }}
-      >
-        Proceed to Checkout
-      </button>
+      <button onClick={userExist}>Proceed to Checkout</button>
     </div>
   );
 }

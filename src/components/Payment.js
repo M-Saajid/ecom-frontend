@@ -8,6 +8,7 @@ import CheckoutProduct from "./CheckoutProduct";
 import { Baskettotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "./url";
 
 function Payment() {
   const navigate = useNavigate();
@@ -23,13 +24,12 @@ function Payment() {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {
       const response = await axios.post(
-        `http://localhost:5000/payment/create?total=${Baskettotal(basket)}`
+        `${baseUrl}/payment/create?total=${Baskettotal(basket)}`
       );
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
-  }, []);
-  console.log("Client Secret is >>>", clientSecret);
+  }, [basket]);
   const handleSubmit = async (event) => {
     //stripe
     event.preventDefault();
@@ -43,13 +43,25 @@ function Payment() {
       setSucceeded(true);
       setError(null);
       setProcessingd(false);
-      const response = await axios.post("http://localhost:5000/api/mail", {
+      //sent customer email after payment is done
+      const response = await axios.post(`${baseUrl}/api/mail`, {
         price: Baskettotal(basket)
       });
+      {
+        // update the stock accprfing to customer purchase
+        {
+          basket.map(async (item) => {
+            console.log("this is the basket ", item.id);
+            const response = await axios.patch(
+              `${baseUrl}/api/stockUpdate/${item.id}`
+            );
+          });
+        }
+      }
     } catch (error) {
       console.log(error);
     }
-
+    //navigation after the paymnet id done
     dispatch({
       type: "EMPTY_BASKET"
     });
@@ -102,7 +114,7 @@ function Payment() {
             <h3>payment method</h3>
           </div>
           <div className="payment__details">
-            {/* stripe will be here */}
+            {/* stripe */}
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
               <div className="payment__pricecontainer">

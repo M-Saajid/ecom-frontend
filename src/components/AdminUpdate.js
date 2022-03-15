@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "../style/AdminUpdate.css";
 import { useStateValue } from "./StateProvider";
 import { NavLink } from "react-router-dom";
+import baseUrl from "../components/url";
 
 function AdminUpdate() {
   let userData = {};
@@ -41,10 +42,10 @@ function AdminUpdate() {
 
     console.log("this is details of image", details);
     console.log("this is details of form data", userData);
-
+    // updating the item where  we get from the reducer UPDATE_BUCKET
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/items/${updateBucketItem.id}`,
+        `${baseUrl}/api/items/${updateBucketItem.id}`,
         details
       );
       console.log("this is api response ", response);
@@ -70,7 +71,6 @@ function AdminUpdate() {
             </div>
             <div className="input__Fields">
               <p>Price LKR</p>
-
               <input
                 type="text"
                 className="input__fields"
@@ -81,7 +81,6 @@ function AdminUpdate() {
             </div>
             <div className="input__Fields">
               <p>Description</p>
-
               <input
                 type="text"
                 className="input__fields"
@@ -92,7 +91,6 @@ function AdminUpdate() {
             </div>
             <div className="input__Fields">
               <p>Rating</p>
-
               <input
                 type="text"
                 className="input__fields"
@@ -103,7 +101,6 @@ function AdminUpdate() {
             </div>
             <div className="input__Fields">
               <p>Quantity</p>
-
               <input
                 type="text"
                 className="input__fields"
@@ -114,7 +111,6 @@ function AdminUpdate() {
             </div>
             <div className="input__Fields">
               <p>category</p>
-
               <input
                 type="text"
                 className="input__fields"
@@ -123,7 +119,6 @@ function AdminUpdate() {
                 onChange={handleChange}
               />
             </div>
-
             <input
               type="file"
               name="file"

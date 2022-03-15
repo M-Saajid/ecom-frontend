@@ -1,7 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import "../style/Login.css";
-
+import { useNavigate } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
+import baseUrl from "./url";
 function Login() {
+  const [{}, dispatch] = useStateValue();
+  const navigate = useNavigate();
+  const [details, setDetails] = useState();
+  //handle login change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  };
+  // authenticate login and dispatch user details to reducer
+  const handleSubmit = async (e) => {
+    try {
+      const response = await axios.post(`${baseUrl}/login`, {
+        username: details.username,
+        password: details.password
+      });
+      dispatch({
+        type: "SET_USER",
+        user: response.data
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="login">
       <div className="login__Banner">
@@ -11,9 +43,21 @@ function Login() {
           alt="/"
         />
         <div className="login__Container">
-          <input type="text" placeholder="Enter the Email"></input>
-          <input type="password" placeholder="Enter the password"></input>
-          <button className="Signin">Sign in</button>
+          <input
+            type="text"
+            onChange={handleChange}
+            name="username"
+            placeholder="Enter the Username"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="password"
+            name="password"
+            placeholder="Enter the password"
+          ></input>
+          <button type="submit" onClick={handleSubmit} className="Signin">
+            Sign in
+          </button>
           <div className="divider" />
         </div>
         <div className="login__SocialContainer">

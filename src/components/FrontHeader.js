@@ -8,14 +8,24 @@ import { useNavigate } from "react-router-dom";
 
 function FrontHeader() {
   const [{ basket, user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+  console.log("this is user", user);
   //loging out user and clear all caches
   const logout = () => {
     if (user) {
-      localStorage.clear();
       window.location.reload();
+      navigate("/");
     }
   };
-
+  const check = () => {
+    if (user) {
+      if (user.data === "admin1200") {
+        navigate("/addminview");
+      }
+    } else {
+      navigate("/register");
+    }
+  };
   const navLink = ({ isActive }) => {
     return {
       textDecoration: isActive ? "none" : "none",
@@ -36,14 +46,9 @@ function FrontHeader() {
             {!user ? <h4>Sign in </h4> : <h4>Logout </h4>}
           </NavLink>
         </div>
-        <div className="create__Account">
+        <div className="create__Account" onClick={check}>
           {/* verify the user as admin or the customer */}
-          <NavLink
-            style={navLink}
-            to={user === "admin1200" ? "/addminview" : "/register"}
-          >
-            {!user ? <h4>Create an account</h4> : <h4>{user.data}</h4>}
-          </NavLink>
+          {!user ? <h4>Create an account</h4> : <h4>{user.data}</h4>}
         </div>
       </div>
     </div>

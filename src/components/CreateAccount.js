@@ -27,6 +27,7 @@ function CreateAccount() {
       navigate("/product");
     } catch (error) {
       console.log(error);
+      alert("User already exsist");
     }
   };
   return (

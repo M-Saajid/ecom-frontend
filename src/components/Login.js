@@ -32,6 +32,7 @@ function Login() {
       navigate("/");
     } catch (error) {
       console.log(error);
+      alert("credential you entered incorrect,Please try again");
     }
   };
   return (

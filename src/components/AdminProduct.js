@@ -3,20 +3,23 @@ import React from "react";
 import "../style/AdminProducts.css";
 import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-import baseUrl from "../components/url";
+import { useNavigate } from "react-router-dom";
 
 function AdminProduct(props) {
+  const navigate = useNavigate();
   const [{ basket, updateBucket }, dispatch] = useStateValue();
   // replacing file "\\" into "//" in image path
   const fileUrl = props.image.replace(/\\/g, "/");
   // split all th "/" get the image into array
   const imageArray = fileUrl.split("/");
   //accessing the image array and adding to base url to get the image
-  const imageUrl = `${baseUrl}/${imageArray[1]}`;
+  const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   //deleteing the item from admin dashboard
   const DeleteItem = async () => {
     try {
-      const response = await axios.delete(`${baseUrl}/api/items/${props.id}`);
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/api/items/${props.id}`
+      );
       console.log(response);
       window.location.reload();
     } catch (error) {
@@ -38,6 +41,7 @@ function AdminProduct(props) {
         category: props.category
       }
     });
+    navigate("/addminUpdate");
   };
 
   return (
@@ -63,11 +67,10 @@ function AdminProduct(props) {
           </p>
         </div>
         <div className="Card__button">
-          <NavLink to="/addminUpdate">
-            <button className="admin__btn" onClick={UpdateItem}>
-              Update
-            </button>
-          </NavLink>
+          <button className="admin__btn" onClick={UpdateItem}>
+            Update
+          </button>
+
           <button className="admin__btn" onClick={DeleteItem}>
             Delete
           </button>

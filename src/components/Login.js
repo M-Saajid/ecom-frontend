@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-import baseUrl from "./url";
+
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 function Login() {
@@ -34,10 +34,13 @@ function Login() {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {
       try {
-        const response = await axios.post(`${baseUrl}/login`, {
-          username: details.username,
-          password: details.password
-        });
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/login`,
+          {
+            username: details.username,
+            password: details.password
+          }
+        );
         dispatch({
           type: "SET_USER",
           user: response.data

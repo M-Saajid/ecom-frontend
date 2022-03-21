@@ -1,7 +1,7 @@
 import React from "react";
 import "../style/CheckoutProduct.css";
 import { useStateValue } from "./StateProvider";
-import baseUrl from "../components/url";
+
 
 function CheckoutProduct(props) {
   const [{ basket }, dispatch] = useStateValue();
@@ -14,7 +14,7 @@ function CheckoutProduct(props) {
   };
   //image accessing
   const imageArray = props.image.split("/");
-  const imageUrl = `${baseUrl}/${imageArray[1]}`;
+  const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   return (
     <div className="checkoutProduct">
       <img className="checkoutProduct__image" src={imageUrl} />

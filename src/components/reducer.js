@@ -39,7 +39,7 @@ function reducer(state, action) {
       return { ...state, basket: newbasket };
     // update the admin update basket dispatch items to that basket
     case "ADD_TO_UPDATES":
-      return { updateBucket: [action.item] };
+      return { ...state, updateBucket: [...state.basket, action.item] };
     // dispatch items to search basket
     case "SEARCH":
       return { ...state, searchBucket: [...state.searchBucket, action.item] };

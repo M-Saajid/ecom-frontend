@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../style/Admin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "../components/url";
 import validate from "../validations/Addproducts";
 
 function Admin() {
@@ -49,7 +48,10 @@ function Admin() {
       data.append("category", details.category);
       data.append("productImage", files);
       try {
-        const response = await axios.post(`${baseUrl}/api/items`, data);
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/items`,
+          data
+        );
         console.log(response);
         navigate("/addminview");
       } catch (error) {

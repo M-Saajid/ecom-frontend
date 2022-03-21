@@ -1,7 +1,6 @@
 import React from "react";
 import "../style/Card.css";
 import { useStateValue } from "./StateProvider";
-import baseUrl from "../components/url";
 
 function Card(props) {
   const [{}, dispatch] = useStateValue();
@@ -23,7 +22,7 @@ function Card(props) {
   //steps to  access the image through url
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
-  const imageUrl = `${baseUrl}/${imageArray[1]}`;
+  const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   console.log("this is image in card", imageUrl);
   return (
     <div className="Card__Container">

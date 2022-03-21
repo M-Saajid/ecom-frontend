@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../style/CreateAccount.css";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "./url";
 import validate from "../validations/Register";
 
 function CreateAccount() {
@@ -28,16 +27,19 @@ function CreateAccount() {
   const handleSubmit = (e) => {
     setErrors(validate(details));
     setIsSubmitting(true);
-  }; 
+  };
   useEffect(async () => {
-    // check if any validation errors are present 
+    // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {
       try {
-        const response = await axios.post(`${baseUrl}/register`, {
-          username: details.username,
-          email: details.email,
-          password: details.password
-        });
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/register`,
+          {
+            username: details.username,
+            email: details.email,
+            password: details.password
+          }
+        );
         navigate("/product");
       } catch (err) {
         console.log(err);

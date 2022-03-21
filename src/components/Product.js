@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../style/Product.css";
 import Card from "./Card";
-import baseUrl from "./url";
 
 function Product() {
   const [itemDetail, setitemDetail] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`${baseUrl}/api/items`);
+      const request = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/items`
+      );
       setitemDetail(request.data.data.foundItems);
       return request;
     }

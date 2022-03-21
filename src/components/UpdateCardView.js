@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useStateValue } from "./StateProvider";
-import baseUrl from "./url";
 import "../style/UpdateCardView.css";
 import axios from "axios";
 
@@ -9,7 +8,7 @@ function UpdateCardView() {
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
   const imageArray = updateBucket[0].image.split("/");
-  const imageUrl = `${baseUrl}/${imageArray[1]}`;
+  const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   console.log("this is image in card", imageUrl);
   const [details, setDetails] = useState({
     title: updateBucketItem.title,
@@ -44,7 +43,7 @@ function UpdateCardView() {
     // updating the item where  we get from the reducer UPDATE_BUCKET
     try {
       const response = await axios.patch(
-        `${baseUrl}/api/items/${updateBucketItem.id}`,
+        `${process.env.REACT_APP_BASE_URL}/api/items/${updateBucketItem.id}`,
         data
       );
       console.log("this is api response ", response);

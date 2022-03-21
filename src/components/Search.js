@@ -4,7 +4,6 @@ import "../style/Search.css";
 import axios from "axios";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "./url";
 
 function Search() {
   const navigate = useNavigate();
@@ -22,9 +21,12 @@ function Search() {
         type: "EMPTY_SEARCH_BASKET"
       });
       try {
-        const result = await axios.post(`${baseUrl}/api/search`, {
-          title: search
-        });
+        const result = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/search`,
+          {
+            title: search
+          }
+        );
         console.log("Search results", result);
         // updating all the user prefer items to usestate
         setSearcResults(result.data.data);

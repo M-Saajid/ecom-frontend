@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import AdminProduct from "./AdminProduct";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import baseUrl from "../components/url";
 
 function AdminItems() {
   const [itemDetail, setitemDetail] = useState([]);
@@ -13,7 +12,9 @@ function AdminItems() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const request = await axios.get(`${baseUrl}/api/items`);
+        const request = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/api/items`
+        );
         setitemDetail(request.data.data.foundItems);
         return request;
       } catch (error) {

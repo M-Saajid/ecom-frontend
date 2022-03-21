@@ -6,6 +6,7 @@ import { useStateValue } from "./StateProvider";
 
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
+import { useAuth } from "./auth";
 function Login() {
   const [{}, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Login() {
     username: "",
     password: ""
   });
+  const auth = useAuth();
   //handle login change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +47,8 @@ function Login() {
           type: "SET_USER",
           user: response.data
         });
+
+        // auth.Login(response.data);
         navigate("/");
       } catch (error) {
         console.log(error);

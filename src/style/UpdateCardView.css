@@ -1,0 +1,49 @@
+.Card__ContainerUpdate {
+  border: 2px solid black;
+  padding: 25px;
+  height: fit-content;
+  margin: 50px 5% 0px 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 1s;
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px 5px rgba(190, 189, 194, 0.836),
+    0 3px 3px 0 rgb(49, 66, 141);
+  width: 50%;
+  margin-top: 130px;
+}
+
+.cardImage{
+  height: 200px;
+  width: 100%;
+}
+.brand__titles {
+  text-align: center;
+  font-weight: 800;
+  padding: 15px;
+}
+.Card__Container:hover {
+  transform: scale(1.1);
+}
+.Card__Description {
+  text-align: left;
+  color: rgb(78, 77, 75);
+  padding: 2px;
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+.Card__Detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px;
+}
+.price {
+  margin-bottom: 5px;
+  padding: 2px;
+}
+.rating {
+  font-size: medium;
+  padding-bottom: 2px;
+}

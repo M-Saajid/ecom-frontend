@@ -1,58 +1,62 @@
 .register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-  }
-  .register__Banner {
-    border: 2px solid black;
-    margin: auto;
-    width: 25%;
-    height: fit-content;
-    padding: 10PX;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 5PX;
-    box-shadow: 3px 4px 8px 3px rgba(0, 0, 0, 0.774),
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+.register__Banner {
+  border: 2px solid black;
+  margin: auto;
+  width: 25%;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 3px 4px 8px 3px rgba(0, 0, 0, 0.774),
     0 6px 20px 0 rgba(32, 24, 24, 0.829);
-  }
-  .logo {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    object-fit: contain;
-    width: 100px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 100px;
-    
-  }
-  .register__Container {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    padding: 10px;
-    align-items: center;
-  }
-  .register__Container > input {
-    padding: 10px;
-    margin-bottom: 10%;
-    border: 1px solid black;
-    width: 100%;
-    height: 25px;
-    border-radius: 5px;
-  }
-  .register__Container > button {
-    text-align: center;
-    padding: 10px;
-    border: none;
-    background-color: rgb(18, 18, 39);
-    color: antiquewhite;
-    border-radius: 10px;
-    width: 50%;
-    margin-bottom: 10%;
-  }
-  .register__Container>button:hover{
-    color: rgb(255, 255, 255);
-  
-  }
+}
+.logo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  object-fit: contain;
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 100px;
+}
+.register__Container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+  align-items: center;
+}
+.register__Container > p {
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  color: #f00e0e;
+}
+.register__Container > input {
+  padding: 10px;
+  margin-bottom: 10%;
+  border: 1px solid black;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+}
+.register__Container > button {
+  text-align: center;
+  padding: 10px;
+  border: none;
+  background-color: rgb(18, 18, 39);
+  color: antiquewhite;
+  border-radius: 10px;
+  width: 50%;
+  margin-bottom: 10%;
+}
+.register__Container > button:hover {
+  color: rgb(255, 255, 255);
+}

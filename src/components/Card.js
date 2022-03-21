@@ -24,8 +24,7 @@ function Card(props) {
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = `${baseUrl}/${imageArray[1]}`;
-  // console.log("this is image in card", imageUrl);
-
+  console.log("this is image in card", imageUrl);
   return (
     <div className="Card__Container">
       <div className="Card__Logo">

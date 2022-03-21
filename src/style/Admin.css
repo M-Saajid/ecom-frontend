@@ -13,6 +13,17 @@
   box-shadow: 1px 2px 3px 5px rgba(190, 189, 194, 0.836),
     0 3px 3px 0 rgb(49, 66, 141);
 }
+.input__Fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.alert {
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  color: #f00e0e;
+}
 .admin__form {
   display: flex;
   flex-direction: column;

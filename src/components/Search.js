@@ -18,10 +18,14 @@ function Search() {
   const send = (req, res) => {
     // getting the all items where user search for
     const searchHandle = async () => {
+      dispatch({
+        type: "EMPTY_SEARCH_BASKET"
+      });
       try {
         const result = await axios.post(`${baseUrl}/api/search`, {
           title: search
         });
+        console.log("Search results", result);
         // updating all the user prefer items to usestate
         setSearcResults(result.data.data);
       } catch (error) {

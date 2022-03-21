@@ -21,6 +21,8 @@ function reducer(state, action) {
     // remove the  all items in the basket
     case "EMPTY_BASKET":
       return { ...state, basket: [] };
+    case "EMPTY_SEARCH_BASKET":
+      return { ...state, searchBucket: [] };
     // remove the   items in the basket according to customer request
     case "REMOVE_FROM_BASKET":
       let newbasket = [...state.basket];

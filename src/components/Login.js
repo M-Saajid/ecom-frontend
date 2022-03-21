@@ -1,13 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import baseUrl from "./url";
+import validate from "../validations/Login";
+import Loginsocial from "./Loginsocial";
 function Login() {
   const [{}, dispatch] = useStateValue();
   const navigate = useNavigate();
-  const [details, setDetails] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [details, setDetails] = useState({
+    username: "",
+    password: ""
+  });
   //handle login change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,21 +27,28 @@ function Login() {
   };
   // authenticate login and dispatch user details to reducer
   const handleSubmit = async (e) => {
-    try {
-      const response = await axios.post(`${baseUrl}/login`, {
-        username: details.username,
-        password: details.password
-      });
-      dispatch({
-        type: "SET_USER",
-        user: response.data
-      });
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      alert("credential you entered incorrect,Please try again");
-    }
+    setErrors(validate(details));
+    setIsSubmitting(true);
   };
+  useEffect(async () => {
+    // check if any validation errors are present
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      try {
+        const response = await axios.post(`${baseUrl}/login`, {
+          username: details.username,
+          password: details.password
+        });
+        dispatch({
+          type: "SET_USER",
+          user: response.data
+        });
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        alert("credential you entered incorrect,Please try again");
+      }
+    }
+  }, [errors]);
   return (
     <div className="login">
       <div className="login__Banner">
@@ -49,45 +63,23 @@ function Login() {
             onChange={handleChange}
             name="username"
             placeholder="Enter the Username"
+            value={details.username}
           ></input>
+          {errors.username && <p>{errors.username}</p>}
           <input
             onChange={handleChange}
             type="password"
             name="password"
             placeholder="Enter the password"
+            value={details.password}
           ></input>
+          {errors.password && <p>{errors.password}</p>}
           <button type="submit" onClick={handleSubmit} className="Signin">
             Sign in
           </button>
           <div className="divider" />
         </div>
-        <div className="login__SocialContainer">
-          <p>Login or Create Using Social-media accounts </p>
-          <div className="Google">
-            <img
-              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-              alt=""
-              className="icon"
-            />
-            <h4>Google</h4>
-          </div>
-          <div className="Facebook">
-            <img
-              src="https://www.freepnglogos.com/uploads/facebook-logo-icon/facebook-logo-icon-file-facebook-icon-svg-wikimedia-commons-4.png"
-              alt=""
-              className="icon"
-            />
-            <h4>Facebook</h4>
-          </div>
-          <div className="Twitter">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/124/124021.png"
-              alt=""
-              className="icon"
-            />
-            <h4>Twitter</h4>
-          </div>
-        </div>
+        <Loginsocial />
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ function Payment() {
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
-  }, [basket]);
+  }, []);
   const handleSubmit = async (event) => {
     //stripe
     event.preventDefault();
@@ -48,7 +48,7 @@ function Payment() {
         price: Baskettotal(basket)
       });
       {
-        // update the stock accprfing to customer purchase
+        // update the stock after to  customer purchase
         {
           basket.map(async (item) => {
             console.log("this is the basket ", item.id);
@@ -81,7 +81,7 @@ function Payment() {
           Checkout (<Link to="/checkout">{basket?.length} Items</Link>){" "}
         </h1>
         <div className="paymnet__section">
-          <div className="payment__title">
+          <div className="payment__tittle">
             <h3>Dilivery Address</h3>
           </div>
           <div className="payment__address">
@@ -91,7 +91,7 @@ function Payment() {
         </div>
         {/* review item  */}
         <div className="paymnet__section">
-          <div className="payment__title">
+          <div className="payment__tittle">
             <h3>Review Items </h3>
           </div>
           <div className="payment__items">
@@ -99,7 +99,7 @@ function Payment() {
               <CheckoutProduct
                 key={item.id}
                 id={item.id}
-                title={item.title}
+                tittle={item.tittle}
                 price={item.price}
                 image={item.image}
                 rating={item.rating}
@@ -110,7 +110,7 @@ function Payment() {
         </div>
         {/* payment method */}
         <div className="paymnet__section">
-          <div className="payment__title">
+          <div className="payment__tittle">
             <h3>payment method</h3>
           </div>
           <div className="payment__details">

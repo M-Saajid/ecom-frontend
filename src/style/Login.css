@@ -9,13 +9,13 @@
   margin: auto;
   width: 25%;
   height: fit-content;
-  padding: 10PX;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5PX;
+  border-radius: 5px;
   box-shadow: 3px 4px 8px 3px rgba(0, 0, 0, 0.774),
-  0 6px 20px 0 rgba(32, 24, 24, 0.829);
+    0 6px 20px 0 rgba(32, 24, 24, 0.829);
 }
 .logo {
   margin-top: 20px;
@@ -25,7 +25,6 @@
   margin-right: auto;
   margin-left: auto;
   border-radius: 100px;
-  
 }
 .login__Container {
   display: flex;
@@ -33,6 +32,12 @@
   width: 50%;
   padding: 10px;
   align-items: center;
+}
+.login__Container > p {
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  color: #f00e0e;
 }
 .login__Container > input {
   padding: 10px;
@@ -52,26 +57,24 @@
   width: 50%;
   margin-bottom: 10%;
 }
-.login__Container>button:hover{
+.login__Container > button:hover {
   color: rgb(255, 255, 255);
-
 }
 .divider {
   border: 1px solid black;
   width: 100%;
 }
-.login__SocialContainer>p{
+.login__SocialContainer > p {
   font-weight: 100;
   color: black;
-
 }
-.login__SocialContainer{
+.login__SocialContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
 }
-.Google{
+.Google {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -82,7 +85,7 @@
   margin-left: auto;
   margin-right: auto;
 }
-.Facebook{
+.Facebook {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -91,7 +94,7 @@
   height: 30px;
   margin-top: 15px;
 }
-.Twitter{
+.Twitter {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,7 +103,7 @@
   height: 30px;
   margin-top: 15px;
 }
-.icon{
+.icon {
   width: 20px;
   height: 20px;
   margin-right: 20px;

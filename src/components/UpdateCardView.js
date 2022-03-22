@@ -60,7 +60,6 @@ function UpdateCardView() {
   return (
     <div className="Card__ContainerUpdate">
       <div className="Card__Logo">
-        <form></form>
         <div className="brand__titles">
           <p>{details.title}</p>
           <input
@@ -151,7 +150,7 @@ function UpdateCardView() {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" onClick={send}>
+      <button className="updateBtn" type="submit" onClick={send}>
         update the details
       </button>
     </div>

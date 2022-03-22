@@ -21,7 +21,8 @@ function AdminProduct(props) {
         `${process.env.REACT_APP_BASE_URL}/api/items/${props.id}`
       );
       console.log(response);
-      window.location.reload();
+      // window.location.reload();
+      navigate("/product");
     } catch (error) {
       console.log(error);
     }

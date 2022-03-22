@@ -10,7 +10,7 @@ import Product from "./components/Product";
 import CheckoutPage from "./components/CheckoutPage";
 import Admin from "./components/Admin";
 import AdminItems from "./components/AdminItems";
-import AdminUpdate from "./components/AdminUpdate";
+
 import Payment from "./components/Payment.js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";

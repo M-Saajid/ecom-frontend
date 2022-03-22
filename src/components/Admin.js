@@ -33,12 +33,13 @@ function Admin() {
   //submit the values added by the form
   const send = async (e) => {
     e.preventDefault();
-    setErrors(validate(details));
+    console.log("this is the file", files);
+    setErrors(validate(details, files));
     setIsSubmitting(true);
   };
   useEffect(async () => {
-    // check if any validation errors are present
-    if (Object.keys(errors).length === 0 && isSubmitting) {
+    // check if any validation errors are presentand user have selected the image
+    if (Object.keys(errors).length === 0 && isSubmitting && files) {
       const data = new FormData();
       data.append("title", details.title);
       data.append("description", details.desc);

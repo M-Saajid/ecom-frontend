@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function Payment() {
   const navigate = useNavigate();
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, email }, dispatch] = useStateValue();
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -31,6 +31,7 @@ function Payment() {
     };
     getClientSecret();
   }, []);
+
   const handleSubmit = async (event) => {
     //stripe
     event.preventDefault();
@@ -45,9 +46,11 @@ function Payment() {
       setError(null);
       setProcessingd(false);
       //sent customer email after payment is done
+      console.log("this is user email", email);
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/mail`,
         {
+          Cusemail: email,
           price: Baskettotal(basket)
         }
       );
@@ -55,7 +58,6 @@ function Payment() {
         // update the stock after to  customer purchase
         {
           basket.map(async (item) => {
-            console.log("this is the basket ", item.id);
             const response = await axios.patch(
               `${process.env.REACT_APP_BASE_URL}/api/stockUpdate/${item.id}`
             );
@@ -71,12 +73,14 @@ function Payment() {
     });
     navigate("/product");
   };
+
   const handleChange = (event) => {
     //display error when customer type their card details
     //listen to  changes on the card element
     setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
+
   return (
     <div className="payment">
       <div className="paymnet__container">

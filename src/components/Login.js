@@ -45,6 +45,16 @@ function Login() {
           type: "SET_USER",
           user: response.data
         });
+        const results = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
+          {
+            username: details.username
+          }
+        );
+        dispatch({
+          type: "SET_EMAIL",
+          email: results.data.results[0].email
+        });
         navigate("/");
       } catch (error) {
         console.log(error);

@@ -33,8 +33,7 @@ function Login() {
           type: "SET_USER",
           user: response.data
         });
-
-        navigate((-1));
+        navigate(-1);
       } catch (error) {
         console.log(error);
         alert("credential you entered incorrect,Please try again", error);

@@ -8,7 +8,7 @@ import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
 function Login() {
-  const [{}, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -17,21 +17,7 @@ function Login() {
     password: ""
   });
   const auth = useAuth();
-  //handle login change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value
-      };
-    });
-  };
-  // authenticate login and dispatch user details to reducer
-  const handleSubmit = async (e) => {
-    setErrors(validate(details));
-    setIsSubmitting(true);
-  };
+  const [client, setClinet] = useState(user);
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -48,14 +34,30 @@ function Login() {
           user: response.data
         });
 
-        // auth.Login(response.data);
-        navigate("/");
+        navigate((-1));
       } catch (error) {
         console.log(error);
-        alert("credential you entered incorrect,Please try again");
+        alert("credential you entered incorrect,Please try again", error);
       }
     }
   }, [errors]);
+  //handle login change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  };
+  // authenticate login and dispatch user details to reducer
+  const handleSubmit = (e) => {
+    setErrors(validate(details));
+    setIsSubmitting(true);
+    auth.login(details.username);
+  };
+
   return (
     <div className="login">
       <div className="login__Banner">

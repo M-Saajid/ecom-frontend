@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../style/FrontHeader.css";
@@ -8,21 +9,20 @@ import { useAuth } from "./auth";
 
 function FrontHeader() {
   const [{ basket, user }, dispatch] = useStateValue();
-  const navigate = useNavigate();
-  console.log("this is user", user);
   const auth = useAuth();
+  const navigate = useNavigate();
   //loging out user and clear all caches
   const logout = () => {
-    auth.logout();
     navigate("/");
-    // if (user) {
-    //   window.location.reload();
-    //   navigate("/");
-    // }
+    auth.logout();
+    if (user) {
+      window.location.reload();
+      navigate("/");
+    }
   };
   const check = () => {
-    if (auth.user) {
-      if (auth.user === "admin1200") {
+    if (user) {
+      if (user.data === "admin1200") {
         navigate("/addminview");
       }
     } else {
@@ -46,12 +46,12 @@ function FrontHeader() {
       <div className="auth__Option">
         <div className="Signin">
           <NavLink style={navLink} onClick={logout} to={!user && "/login"}>
-            {!auth.user ? <h4>Sign in </h4> : <h4>Logout </h4>}
+            {!user ? <h4>Sign in </h4> : <h4>Logout </h4>}
           </NavLink>
         </div>
         <div className="create__Account" onClick={check}>
           {/* verify the user as admin or the customer */}
-          {!auth.user ? <h4>Create an account</h4> : <h4>{auth.user}</h4>}
+          {!user ? <h4>Create an account</h4> : <h4>{user.data}</h4>}
         </div>
       </div>
     </div>

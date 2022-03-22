@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useStateValue } from "./StateProvider";
 import "../style/UpdateCardView.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import validate from "../validations/UpdateProduct";
+
+import { useNavigate } from "react-router-dom";
 
 function UpdateCardView() {
   const [{ basket, updateBucket }] = useStateValue();
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
+<<<<<<< HEAD
+
+=======
+>>>>>>> routeProtect
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
   const imageArray = updateBucket[0].image.split("/");
@@ -34,36 +37,39 @@ function UpdateCardView() {
   };
   const send = async (e) => {
     e.preventDefault();
-    setErrors(validate(details, files));
-    setIsSubmitting(true);
-  };
-  useEffect(async () => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-      const data = new FormData();
-      data.append("productImage", files);
-      data.append("title", details.title);
-      data.append("description", details.desc);
-      data.append("price", details.price);
-      data.append("rating", details.rating);
-      data.append("quantity", details.quantity);
-      data.append("category", details.category);
-      console.log("this data in the image ", [...data]);
-      console.log("this is details of image", details);
+    const data = new FormData();
+    data.append("productImage", files);
+    data.append("title", details.title);
+    data.append("description", details.desc);
+    data.append("price", details.price);
+    data.append("rating", details.rating);
+    data.append("quantity", details.quantity);
+    data.append("category", details.category);
+    console.log("this data in the image ", [...data]);
+    console.log("this is details of image", details);
 
-      // updating the item where  we get from the reducer UPDATE_BUCKET
-      try {
-        const response = await axios.patch(
-          `${process.env.REACT_APP_BASE_URL}/api/items/${updateBucketItem.id}`,
-          data
-        );
-        console.log("this is api response ", response);
-      } catch (error) {
-        console.log(error);
-        alert(error);
-      }
-      navigate(-1);
+    // updating the item where  we get from the reducer UPDATE_BUCKET
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/api/items/${updateBucketItem.id}`,
+        data
+      );
+      console.log("this is api response ", response);
+<<<<<<< HEAD
+<<<<<<< HEAD
+      // navigate("/");
+=======
+      
+>>>>>>> routeProtect
+=======
+      
+>>>>>>> routeProtect
+    } catch (error) {
+      console.log(error);
+      alert(error);
     }
-  }, [errors]);
+    navigate((-1))
+  };
 
   return (
     <div className="Card__ContainerUpdate">
@@ -125,9 +131,7 @@ function UpdateCardView() {
             name="quantity"
             placeholder="Enter the Quantity "
             onChange={handleChange}
-            value={details.quantity}
           />
-          {errors.quantity && <p className="alert">{errors.quantity}</p>}
         </div>
       </div>
       <div className="Card__Detail">
@@ -148,9 +152,7 @@ function UpdateCardView() {
           name="rating"
           placeholder="Enter the Rating "
           onChange={handleChange}
-          value={details.rating}
         />
-        {errors.rating && <p className="alert">{errors.rating}</p>}
       </div>
       <div className="input__Fields">
         <p>Price LKR</p>
@@ -160,9 +162,7 @@ function UpdateCardView() {
           name="price"
           placeholder="Enter the price "
           onChange={handleChange}
-          value={details.price}
         />
-        {errors.price && <p className="alert">{errors.price}</p>}
       </div>
       <button className="updateBtn" type="submit" onClick={send}>
         update the details

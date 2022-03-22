@@ -33,7 +33,8 @@ function Login() {
           type: "SET_USER",
           user: response.data
         });
-
+<<<<<<< HEAD
+<<<<<<< HEAD
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
           {
@@ -44,8 +45,13 @@ function Login() {
           type: "SET_EMAIL",
           email: results.data.results[0].email
         });
-
+        navigate("/");
+=======
         navigate(-1);
+>>>>>>> routeProtect
+=======
+        navigate(-1);
+>>>>>>> routeProtect
       } catch (error) {
         console.log(error);
         alert("credential you entered incorrect,Please try again", error);

@@ -49,7 +49,7 @@ function UpdateCardView() {
         data
       );
       console.log("this is api response ", response);
-      // navigate((-1));
+      
     } catch (error) {
       console.log(error);
       alert(error);

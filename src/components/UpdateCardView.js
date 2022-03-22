@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { useStateValue } from "./StateProvider";
 import "../style/UpdateCardView.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
 function UpdateCardView() {
   const [{ basket, updateBucket }] = useStateValue();
   const navigate = useNavigate();
+<<<<<<< HEAD
 
+=======
+>>>>>>> routeProtect
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
   const imageArray = updateBucket[0].image.split("/");
@@ -52,7 +56,11 @@ function UpdateCardView() {
       );
       console.log("this is api response ", response);
 <<<<<<< HEAD
+<<<<<<< HEAD
       // navigate("/");
+=======
+      
+>>>>>>> routeProtect
 =======
       
 >>>>>>> routeProtect

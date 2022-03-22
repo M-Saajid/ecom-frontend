@@ -34,6 +34,7 @@ function Login() {
           user: response.data
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
           {
@@ -45,6 +46,9 @@ function Login() {
           email: results.data.results[0].email
         });
         navigate("/");
+=======
+        navigate(-1);
+>>>>>>> routeProtect
 =======
         navigate(-1);
 >>>>>>> routeProtect

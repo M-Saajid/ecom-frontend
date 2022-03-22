@@ -5,13 +5,16 @@ import "../style/FrontHeader.css";
 import Search from "./Search";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./auth";
 
 function FrontHeader() {
   const [{ basket, user }, dispatch] = useStateValue();
+  const auth = useAuth();
   const navigate = useNavigate();
-  console.log("this is user", user);
   //loging out user and clear all caches
   const logout = () => {
+    navigate("/");
+    auth.logout();
     if (user) {
       window.location.reload();
       navigate("/");

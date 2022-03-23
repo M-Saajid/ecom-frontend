@@ -19,6 +19,7 @@ function Payment() {
   const [processing, setProcessingd] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
   const [disabled, setDisabled] = useState(true);
+  
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {

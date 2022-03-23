@@ -12,7 +12,7 @@ export default function validateInfo(values, files) {
   if (!values.desc) {
     errors.desc = "Description required";
   }
-  if (!values.rating || values.rating < 1 || values.rating > 5) {
+  if (!values.rating||isNaN(values.rating) || values.rating < 1 || values.rating > 5) {
     errors.rating = "Rating must be between 1-5";
   }
   if (!values.quantity || isNaN(values.quantity)) {

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";

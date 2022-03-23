@@ -28,7 +28,7 @@ function AdminProduct(props) {
       console.log(error);
     }
   };
-
+  
   //upload the item to reducer so admin can update the specific from the update ui
   const UpdateItem = () => {
     dispatch({

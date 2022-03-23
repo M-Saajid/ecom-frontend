@@ -8,6 +8,7 @@ function SearchProduct() {
   const [{ search }] = useStateValue();
   const [searchResults, setSearcResults] = useState({});
   console.log("this is search ", search);
+  
   useEffect(async () => {
     //  getting the all items where user search for
     if (search) {

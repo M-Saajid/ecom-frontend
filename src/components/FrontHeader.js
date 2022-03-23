@@ -48,7 +48,7 @@ function FrontHeader() {
           {!userName ? (
             <h4 onClick={check}>Create an account</h4>
           ) : (
-            <h4>{userName}</h4>
+            <h4 onClick={check}>{userName}</h4>
           )}
         </div>
       </div>

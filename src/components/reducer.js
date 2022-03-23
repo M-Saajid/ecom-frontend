@@ -8,7 +8,9 @@ export const initialState = {
   //update the user
   user: null,
   //user email
-  email: null
+  email: null,
+  //search keyword
+  search: null
 };
 // basket total view in cart and purchase
 export const Baskettotal = (basket) =>
@@ -55,6 +57,10 @@ function reducer(state, action) {
       return {
         ...state,
         email: action.email
+      };
+    case "SET_SEARCH_KEY":
+      return {
+        search: action.searchkey
       };
     default:
       return state;

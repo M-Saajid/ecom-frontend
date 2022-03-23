@@ -16,6 +16,7 @@ function Login() {
     username: "",
     password: ""
   });
+
   const auth = useAuth();
   const [client, setClinet] = useState(user);
   useEffect(async () => {
@@ -29,6 +30,7 @@ function Login() {
             password: details.password
           }
         );
+
         dispatch({
           type: "SET_USER",
           user: response.data

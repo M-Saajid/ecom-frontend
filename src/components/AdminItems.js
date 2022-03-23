@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 
 function AdminItems() {
   const [itemDetail, setitemDetail] = useState([]);
+
   // fetch all items
   useEffect(() => {
     async function fetchData() {
@@ -23,6 +24,7 @@ function AdminItems() {
     }
     fetchData();
   }, []);
+
   return (
     <div className="admin">
       <div className="admin__ContainerHeader">

@@ -5,6 +5,8 @@ import Card from "./Card";
 
 function Product() {
   const [itemDetail, setitemDetail] = useState([]);
+  
+  // view all product
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(
@@ -15,6 +17,7 @@ function Product() {
     }
     fetchData();
   }, []);
+
   return (
     //customer view product
     <div className="Product">

@@ -7,7 +7,7 @@ import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
 function Login() {
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -17,7 +17,7 @@ function Login() {
   });
 
   const auth = useAuth();
-  const [client, setClinet] = useState(user);
+
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -29,12 +29,14 @@ function Login() {
             password: details.password
           }
         );
-
-        dispatch({
-          type: "SET_USER",
-          user: response.data
-        });
+        // //update the user name so we can access it from reducer and  get the mail id
+        // dispatch({
+        //   type: "SET_USER",
+        //   user: response.data
+        // });
+        // setup local storage so we can access user name locaaly
         localStorage.setItem("user", response.data.data);
+
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
           {
@@ -45,7 +47,6 @@ function Login() {
           type: "SET_EMAIL",
           email: results.data.results[0].email
         });
-
         navigate(-1);
       } catch (error) {
         console.log(error);
@@ -53,6 +54,7 @@ function Login() {
       }
     }
   }, [errors]);
+
   //handle login change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,6 +65,7 @@ function Login() {
       };
     });
   };
+
   // authenticate login and dispatch user details to reducer
   const handleSubmit = (e) => {
     setErrors(validate(details));

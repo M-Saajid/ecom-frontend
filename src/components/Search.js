@@ -13,6 +13,7 @@ function Search() {
   const handleChange = (event) => {
     setSearch(event.target.value);
   };
+
   const send = (req, res) => {
     dispatch({
       type: "SET_SEARCH_KEY",
@@ -20,6 +21,7 @@ function Search() {
     });
     navigate("/searchproduct");
   };
+
   return (
     <div className="search">
       <input className="search__Text" onChange={handleChange} type="text" />

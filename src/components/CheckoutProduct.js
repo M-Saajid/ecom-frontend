@@ -2,9 +2,9 @@ import React from "react";
 import "../style/CheckoutProduct.css";
 import { useStateValue } from "./StateProvider";
 
-
 function CheckoutProduct(props) {
   const [{ basket }, dispatch] = useStateValue();
+
   //removing the items from the basket  from the reducer
   const removeItems = () => {
     dispatch({
@@ -12,9 +12,11 @@ function CheckoutProduct(props) {
       id: props.id
     });
   };
+
   //image accessing
   const imageArray = props.image.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
+
   return (
     <div className="checkoutProduct">
       <img className="checkoutProduct__image" src={imageUrl} />

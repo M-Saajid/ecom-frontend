@@ -8,14 +8,17 @@ import { useNavigate } from "react-router-dom";
 function Subtotal() {
   const [{ basket, user }] = useStateValue();
   const navigate = useNavigate();
+  const userName = localStorage.getItem("user");
+
   // check weather user exsist before proceeding to payment
   const userExist = () => {
-    if (!user) {
+    if (!userName) {
       navigate("/login");
     } else {
       navigate("/payment");
     }
   };
+
   return (
     <div className="subtotal">
       <CurrencyFormat

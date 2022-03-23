@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "../style/FrontHeader.css";
 import Search from "./Search";
 import { useStateValue } from "./StateProvider";
@@ -8,19 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./auth";
 
 function FrontHeader() {
-  const [{ basket, user }, dispatch] = useStateValue();
-  const auth = useAuth();
   const navigate = useNavigate();
   const userName = localStorage.getItem("user");
   console.log("local storage user", userName);
-  //loging out user and clear all caches
+
   const login = () => {
     navigate("/login");
   };
+
+  //loging out user and clear all caches
   const logout = () => {
     navigate("/");
     localStorage.clear();
   };
+
   const check = () => {
     if (userName === "admin1200") {
       navigate("/addminview");
@@ -28,14 +28,7 @@ function FrontHeader() {
       navigate("/register");
     }
   };
-  const navLink = ({ isActive }) => {
-    return {
-      textDecoration: isActive ? "none" : "none",
-      color: isActive
-        ? "rgba(255, 255, 255, 0.836)"
-        : "rgba(255, 255, 255, 0.836)"
-    };
-  };
+
   return (
     <div className="auth__Header">
       <h4>ABAEC </h4>
@@ -50,9 +43,13 @@ function FrontHeader() {
             <h4 onClick={logout}>Logout </h4>
           )}
         </div>
-        <div className="create__Account" onClick={check}>
+        <div className="create__Account">
           {/* verify the user as admin or the customer */}
-          {!userName ? <h4>Create an account</h4> : <h4>{userName}</h4>}
+          {!userName ? (
+            <h4 onClick={check}>Create an account</h4>
+          ) : (
+            <h4>{userName}</h4>
+          )}
         </div>
       </div>
     </div>

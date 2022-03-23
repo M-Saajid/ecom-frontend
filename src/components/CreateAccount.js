@@ -13,6 +13,7 @@ function CreateAccount() {
     password: ""
   });
   const [errors, setErrors] = useState({});
+
   //onhandling the  input values
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,11 +24,13 @@ function CreateAccount() {
       };
     });
   };
+
   // register the user  and navigate to the products
   const handleSubmit = (e) => {
     setErrors(validate(details));
     setIsSubmitting(true);
   };
+
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {

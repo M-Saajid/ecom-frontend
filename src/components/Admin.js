@@ -23,6 +23,7 @@ function Admin() {
       };
     });
   };
+
   //submit the values added by the form
   const send = async (e) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ function Admin() {
     setErrors(validate(details, files));
     setIsSubmitting(true);
   };
+
   useEffect(async () => {
     // check if any validation errors are presentand user have selected the image
     if (Object.keys(errors).length === 0 && isSubmitting && files) {
@@ -53,6 +55,7 @@ function Admin() {
       }
     }
   }, [errors]);
+
   return (
     <div className="admin">
       <div className="admin__component">
@@ -60,7 +63,7 @@ function Admin() {
         <form className="admin__form">
           <div className="admin__detail">
             <div className="input__Fields">
-              <p>title</p>
+              <p>Tittle</p>
               <input
                 type="text"
                 className="input__fields"

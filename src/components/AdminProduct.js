@@ -1,19 +1,20 @@
 import axios from "axios";
 import React from "react";
 import "../style/AdminProducts.css";
-import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
 
 function AdminProduct(props) {
   const navigate = useNavigate();
-  const [{ basket, updateBucket }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
+
   // replacing file "\\" into "//" in image path
   const fileUrl = props.image.replace(/\\/g, "/");
   // split all th "/" get the image into array
   const imageArray = fileUrl.split("/");
   //accessing the image array and adding to base url to get the image
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
+
   //deleteing the item from admin dashboard
   const DeleteItem = async () => {
     try {
@@ -27,6 +28,7 @@ function AdminProduct(props) {
       console.log(error);
     }
   };
+
   //upload the item to reducer so admin can update the specific from the update ui
   const UpdateItem = () => {
     dispatch({

@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom";
 import validate from "../validations/UpdateProduct";
 
 function UpdateCardView() {
-  const [{ basket, updateBucket }] = useStateValue();
+  const [{ updateBucket }] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
+  // constricting image url
   const imageArray = updateBucket[0].image.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   console.log("this is image in card", imageUrl);
+  //setting details to previes value
   const [details, setDetails] = useState({
     title: updateBucketItem.title,
     price: updateBucketItem.price,
@@ -23,6 +25,7 @@ function UpdateCardView() {
     quantity: updateBucketItem.quantity,
     category: updateBucketItem.category
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {
@@ -32,11 +35,13 @@ function UpdateCardView() {
       };
     });
   };
+
   const send = async (e) => {
     e.preventDefault();
     setErrors(validate(details, files));
     setIsSubmitting(true);
   };
+
   useEffect(async () => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       const data = new FormData();

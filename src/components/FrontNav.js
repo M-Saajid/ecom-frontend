@@ -6,6 +6,7 @@ import { useStateValue } from "./StateProvider";
 
 function FrontNav() {
   const [{ basket }] = useStateValue();
+
   //remove the underline where represent as link
   const navLink = ({ isActive }) => {
     return {
@@ -15,6 +16,7 @@ function FrontNav() {
         : "rgba(255, 255, 255, 0.836)"
     };
   };
+
   return (
     <div className="front__Nav">
       <NavLink style={navLink} to="/">

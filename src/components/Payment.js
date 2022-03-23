@@ -19,7 +19,7 @@ function Payment() {
   const [processing, setProcessingd] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
   const [disabled, setDisabled] = useState(true);
-  
+
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {
@@ -38,36 +38,36 @@ function Payment() {
     event.preventDefault();
     setProcessingd(true);
     try {
-      const payload = await stripe.confirmCardPayment(clientSecret, {
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)
         }
       });
+
       setSucceeded(true);
       setError(null);
       setProcessingd(false);
+
       //sent customer email after payment is done
       console.log("this is user email", email);
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/mail`,
-        {
-          Cusemail: email,
-          price: Baskettotal(basket)
-        }
-      );
+
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/mail`, {
+        Cusemail: email,
+        price: Baskettotal(basket)
+      });
+
+      // update the stock after to  customer purchase
       {
-        // update the stock after to  customer purchase
-        {
-          basket.map(async (item) => {
-            const response = await axios.patch(
-              `${process.env.REACT_APP_BASE_URL}/api/stockUpdate/${item.id}`
-            );
-          });
-        }
+        basket.map(async (item) => {
+          const response = await axios.patch(
+            `${process.env.REACT_APP_BASE_URL}/api/stockUpdate/${item.id}`
+          );
+        });
       }
     } catch (error) {
       console.log(error);
     }
+
     //navigation after the paymnet id done
     dispatch({
       type: "EMPTY_BASKET"

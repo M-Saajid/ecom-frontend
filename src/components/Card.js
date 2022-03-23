@@ -4,6 +4,7 @@ import { useStateValue } from "./StateProvider";
 
 function Card(props) {
   const [{}, dispatch] = useStateValue();
+
   // adding to the  basket in reducer so user can view it in the cart
   const addToBasket = () => {
     dispatch({
@@ -19,11 +20,13 @@ function Card(props) {
       }
     });
   };
+
   //steps to  access the image through url
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   console.log("this is image in card", imageUrl);
+
   return (
     <div className="Card__Container">
       <div className="Card__Logo">

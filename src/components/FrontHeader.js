@@ -11,20 +11,19 @@ function FrontHeader() {
   const [{ basket, user }, dispatch] = useStateValue();
   const auth = useAuth();
   const navigate = useNavigate();
+  const userName = localStorage.getItem("user");
+  console.log("local storage user", userName);
   //loging out user and clear all caches
+  const login = () => {
+    navigate("/login");
+  };
   const logout = () => {
     navigate("/");
-    auth.logout();
-    if (user) {
-      window.location.reload();
-      navigate("/");
-    }
+    localStorage.clear();
   };
   const check = () => {
-    if (user) {
-      if (user.data === "admin1200") {
-        navigate("/addminview");
-      }
+    if (userName === "admin1200") {
+      navigate("/addminview");
     } else {
       navigate("/register");
     }
@@ -45,13 +44,15 @@ function FrontHeader() {
       </div>
       <div className="auth__Option">
         <div className="Signin">
-          <NavLink style={navLink} onClick={logout} to={!user && "/login"}>
-            {!user ? <h4>Sign in </h4> : <h4>Logout </h4>}
-          </NavLink>
+          {!userName ? (
+            <h4 onClick={login}>Sign in </h4>
+          ) : (
+            <h4 onClick={logout}>Logout </h4>
+          )}
         </div>
         <div className="create__Account" onClick={check}>
           {/* verify the user as admin or the customer */}
-          {!user ? <h4>Create an account</h4> : <h4>{user.data}</h4>}
+          {!userName ? <h4>Create an account</h4> : <h4>{userName}</h4>}
         </div>
       </div>
     </div>

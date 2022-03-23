@@ -34,7 +34,7 @@ function Login() {
           type: "SET_USER",
           user: response.data
         });
-
+        localStorage.setItem("user", response.data.data);
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
           {

@@ -11,12 +11,12 @@ function Admin() {
   const [errors, setErrors] = useState({});
   //intitialize the value of details to null
   const [details, setDetails] = useState({
-    title: " ",
-    price: " ",
-    desc: " ",
-    rating: " ",
-    quantity: " ",
-    category: " "
+    title: "",
+    price: "",
+    desc: "",
+    rating: "",
+    quantity: "",
+    category: ""
   });
   //handling the image file
   const [files, setFiles] = useState();

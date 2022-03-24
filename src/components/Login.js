@@ -30,12 +30,7 @@ function Login() {
             password: details.password
           }
         );
-        // //update the user name so we can access it from reducer and  get the mail id
-        // dispatch({
-        //   type: "SET_USER",
-        //   user: response.data
-        // });
-        // setup local storage so we can access user name locaaly
+ 
         localStorage.setItem("user", response.data.data);
         auth.login(response.data.data);
         const results = await axios.post(

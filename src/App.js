@@ -2,6 +2,8 @@ import FrontHeader from "./components/FrontHeader";
 import FrontNav from "./components/FrontNav";
 import Home from "./components/Home";
 import "./App.css";
+import ProtectedRoutes from "./components/protectroutes.js";
+
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import { useState } from "react";
@@ -33,22 +35,17 @@ function App() {
         <Route path="/product" element={<Product />}></Route>
         <Route path="/checkout" element={<CheckoutPage />}></Route>
         <Route path="/adminadd" element={<Admin />}></Route>
+        {/* <Route element={<ProtectedRoutes />}> */}
         <Route
           path="/addminview"
           element={
             <RequireAuth>
-              <AdminItems />
+              <AdminItems />{" "}
             </RequireAuth>
           }
         ></Route>
-        <Route
-          path="/addminview"
-          element={
-            <RequireAuth>
-              <AdminItems />
-            </RequireAuth>
-          }
-        ></Route>
+        {/* </Route> */}
+
         <Route path="/addminUpdate" element={<UpdateCardView />}></Route>
         <Route path="/searchproduct" element={<SearchProduct />}></Route>
         <Route

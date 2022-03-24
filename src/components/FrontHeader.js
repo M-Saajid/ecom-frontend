@@ -12,8 +12,14 @@ function FrontHeader() {
   console.log("local storage user", userName);
   const auth = useAuth();
 
-  const login = () => {
-    navigate("/login");
+  //remove the underline where represent as link
+  const navLink = ({ isActive }) => {
+    return {
+      textDecoration: isActive ? "none" : "none",
+      color: isActive
+        ? "rgba(255, 255, 255, 0.836)"
+        : "rgba(255, 255, 255, 0.836)"
+    };
   };
 
   //loging out user and clear all caches
@@ -40,7 +46,7 @@ function FrontHeader() {
       <div className="auth__Option">
         <div className="Signin">
           {!userName ? (
-            <NavLink to={"/login"}>
+            <NavLink style={navLink} to={"/login"}>
               <h4>Sign in </h4>
             </NavLink>
           ) : (
@@ -49,7 +55,7 @@ function FrontHeader() {
         </div>
         <div className="create__Account">
           {/* verify the user as admin or the customer */}
-          <NavLink to={"/addminview"}>
+          <NavLink style={navLink} to={"/addminview"}>
             {!userName ? <h4>Create an account</h4> : <h4>{userName}</h4>}
           </NavLink>
         </div>

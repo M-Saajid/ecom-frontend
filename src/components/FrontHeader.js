@@ -3,13 +3,14 @@ import React from "react";
 import "../style/FrontHeader.css";
 import Search from "./Search";
 import { useStateValue } from "./StateProvider";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "./auth";
 
 function FrontHeader() {
   const navigate = useNavigate();
   const userName = localStorage.getItem("user");
   console.log("local storage user", userName);
+  const auth = useAuth();
 
   const login = () => {
     navigate("/login");
@@ -17,8 +18,9 @@ function FrontHeader() {
 
   //loging out user and clear all caches
   const logout = () => {
-    navigate("/");
+    auth.logout();
     localStorage.clear();
+    navigate("/");
   };
 
   const check = () => {
@@ -37,8 +39,10 @@ function FrontHeader() {
       </div>
       <div className="auth__Option">
         <div className="Signin">
-          {!userName ? (
-            <h4 onClick={login}>Sign in </h4>
+          {!auth.user ? (
+            <NavLink to={"/login"}>
+              <h4>Sign in </h4>
+            </NavLink>
           ) : (
             <h4 onClick={logout}>Logout </h4>
           )}

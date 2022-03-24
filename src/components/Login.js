@@ -6,6 +6,7 @@ import { useStateValue } from "./StateProvider";
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
+import { AtmSharp } from "@material-ui/icons";
 function Login() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Login() {
         // });
         // setup local storage so we can access user name locaaly
         localStorage.setItem("user", response.data.data);
-
+        auth.login(response.data.data);
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
           {

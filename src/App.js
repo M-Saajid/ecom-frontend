@@ -23,40 +23,46 @@ const promise = loadStripe(
 
 function App() {
   return (
-    <div className="App">
-      <AuthProvider>
-        <FrontHeader />
-        <FrontNav />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<CreateAccount />}></Route>
-          <Route path="/product" element={<Product />}></Route>
-          <Route path="/checkout" element={<CheckoutPage />}></Route>
-          <Route path="/adminadd" element={<Admin />}></Route>
-          <Route
-            path="/addminview"
-            element={
-              <RequireAuth>
-                <AdminItems />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route path="/addminUpdate" element={<UpdateCardView />}></Route>
-          <Route path="/searchproduct" element={<SearchProduct />}></Route>
-          <Route
-            path="/payment"
-            element={
-              <RequireAuth>
-                <Elements stripe={promise}>
-                  <Payment />
-                </Elements>
-              </RequireAuth>
-            }
-          ></Route>
-        </Routes>{" "}
-      </AuthProvider>
-    </div>
+    <AuthProvider>
+      <FrontHeader />
+      <FrontNav />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<CreateAccount />}></Route>
+        <Route path="/product" element={<Product />}></Route>
+        <Route path="/checkout" element={<CheckoutPage />}></Route>
+        <Route path="/adminadd" element={<Admin />}></Route>
+        <Route
+          path="/addminview"
+          element={
+            <RequireAuth>
+              <AdminItems />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/addminview"
+          element={
+            <RequireAuth>
+              <AdminItems />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route path="/addminUpdate" element={<UpdateCardView />}></Route>
+        <Route path="/searchproduct" element={<SearchProduct />}></Route>
+        <Route
+          path="/payment"
+          element={
+            <RequireAuth>
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>
+            </RequireAuth>
+          }
+        ></Route>
+      </Routes>{" "}
+    </AuthProvider>
   );
 }
 

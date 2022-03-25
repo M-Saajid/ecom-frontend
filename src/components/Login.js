@@ -72,7 +72,7 @@ function Login() {
           email: results.data.results[0].email
         });
 
-        navigate(-1);
+        navigate("/");
       } catch (error) {
         console.log(error);
         alert("credential you entered incorrect,Please try again", error);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Image,
@@ -11,16 +11,33 @@ import {
 } from "@mantine/core";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useStateValue } from "./StateProvider";
-import { autocompleteClasses, CardActions, Rating } from "@mui/material";
+import {
+  autocompleteClasses,
+  CardActions,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Rating
+} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 function ProductCard(props) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const theme = useMantineTheme();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
   const [{}, dispatch] = useStateValue();
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   //   delete items
   const DeleteItem = async () => {
     try {
@@ -29,7 +46,7 @@ function ProductCard(props) {
       );
       console.log(response);
       window.location.reload();
-        // navigate("/product");
+      // navigate("/product");
     } catch (error) {
       console.log(error);
     }
@@ -115,11 +132,32 @@ function ProductCard(props) {
           color="blue"
           fullWidth
           style={{ marginTop: 14 }}
-          onClick={DeleteItem}
+          onClick={handleClickOpen}
         >
           Delete
         </Button>
       </Card>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Confirm delete "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           Are you sure you need to  delete this item .
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={DeleteItem}  autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

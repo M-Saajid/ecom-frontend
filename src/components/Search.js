@@ -6,7 +6,7 @@ import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@mantine/core";
 import { At } from "tabler-icons-react";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function Search() {
       {/* <input className="search__Text" onChange={handleChange} type="text" /> */}
       {/* <PageviewIcon  sx={{ m: 5, width: "25ch" }} className="icon-material-u-i" onClick={send} /> */}
       <Input
-        icon={<SearchIcon  />}
+        icon={<SearchIcon />}
         variant="filled"
         placeholder="Search"
         radius="md"

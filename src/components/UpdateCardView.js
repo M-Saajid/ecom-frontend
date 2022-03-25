@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import validate from "../validations/UpdateProduct";
 import { useNotifications } from "@mantine/notifications";
 import { CheckIcon } from "@modulz/radix-icons";
+import { Rating, Typography } from "@mui/material";
 
 function UpdateCardView() {
   const notifications = useNotifications();
   const [{ updateBucket }] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [values, setValues] = useState(2);
   const [errors, setErrors] = useState({});
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
@@ -167,7 +169,7 @@ function UpdateCardView() {
         </p>
       </div>
       <div className="input__Fields">
-        <p>Rating</p>
+        {/* <p>Rating</p>
         <input
           type="text"
           className="input__fields"
@@ -175,6 +177,12 @@ function UpdateCardView() {
           placeholder="Enter the Rating "
           onChange={handleChange}
           value={details.rating}
+        /> */}
+        <Typography component="legend">Ratings</Typography>
+        <Rating
+          name="simple-controlled"
+          value={values}
+          onChange={handleChange}
         />
         {errors.rating && <p className="alert">{errors.rating}</p>}
       </div>

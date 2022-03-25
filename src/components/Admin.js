@@ -3,9 +3,12 @@ import "../style/Admin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import validate from "../validations/Addproducts";
+import { useNotifications } from "@mantine/notifications";
+import { CheckIcon } from "@modulz/radix-icons";
 
 function Admin() {
   const navigate = useNavigate();
+  const notifications = useNotifications();
   //check user is clicked the submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -49,6 +52,25 @@ function Admin() {
           data
         );
         console.log(response);
+          // notification settings
+          const id = notifications.showNotification({
+            loading: true,
+            title: "Product added Successful ",
+            message:
+             "update successfull",
+            autoClose: false,
+            disallowClose: true
+          });
+          setTimeout(() => {
+            notifications.updateNotification(id, {
+              id,
+              color: "teal",
+              title: "Product added Successful",
+              icon: <CheckIcon />,
+              autoClose: 500
+            });
+          }, 1000);
+
         navigate("/addminview");
       } catch (error) {
         console.log(error);

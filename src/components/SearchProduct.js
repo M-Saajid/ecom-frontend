@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import Card from "./Card";
+import ProductCard from "./ProductCard";
 import { useStateValue } from "./StateProvider";
 
 function SearchProduct() {
@@ -36,14 +37,16 @@ function SearchProduct() {
       {searchResults.length > 0 ? (
         searchResults.map((c) => {
           return (
-            <Card
-              id={c._id}
-              image={c.image}
-              title={c.title}
-              description={c.description}
-              price={c.price}
-              rating={c.rating}
-            />
+            <ProductCard
+            key={c._id}
+            id={c._id}
+            image={c.image}
+            title={c.title}
+            description={c.description}
+            price={c.price}
+            rating={c.rating}
+            quantity={c.quantity}
+          />
           );
         })
       ) : (

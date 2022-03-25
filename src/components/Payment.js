@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
 import "../style/Payment.css";
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutCard from "./CheckoutCard";
 import { Baskettotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
@@ -105,15 +105,16 @@ function Payment() {
           </div>
           <div className="payment__items">
             {basket.map((item) => (
-              <CheckoutProduct
-                key={item.id}
-                id={item.id}
-                tittle={item.tittle}
-                price={item.price}
-                image={item.image}
-                rating={item.rating}
-                description={item.description}
-              />
+              <CheckoutCard
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.image}
+                  rating={item.rating}
+                  description={item.description}
+                  quantity={item.quantity}
+                />
             ))}
           </div>
         </div>

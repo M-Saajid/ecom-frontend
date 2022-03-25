@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import AdminProduct from "./AdminProduct";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import ProductCardAdmin from "./ProductCardAdmin";
 
 function AdminItems() {
   const [itemDetail, setitemDetail] = useState([]);
@@ -42,7 +43,18 @@ function AdminItems() {
         {/* view all items to admin  */}
         {itemDetail.map((c) => {
           return (
-            <AdminProduct
+            /* <AdminProduct
+              key={c._id}
+              id={c._id}
+              image={c.image}
+              title={c.title}
+              description={c.description}
+              price={c.price}
+              rating={c.rating}
+              category={c.category}
+              quantity={c.quantity}
+            /> */
+            <ProductCardAdmin
               key={c._id}
               id={c._id}
               image={c.image}

@@ -12,6 +12,7 @@ function Subtotal() {
 
   // check weather user exsist before proceeding to payment
   const userExist = () => {
+
     if (!userName) {
       navigate("/login");
     } else {

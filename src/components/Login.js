@@ -6,7 +6,9 @@ import { useStateValue } from "./StateProvider";
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
-import { AtmSharp } from "@material-ui/icons";
+import { useNotifications } from "@mantine/notifications";
+import { Check } from "@material-ui/icons";
+import { blue, green } from "@mui/material/colors";
 function Login() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ function Login() {
     username: "",
     password: ""
   });
+  const notifications = useNotifications();
 
   const auth = useAuth();
 
@@ -30,7 +33,14 @@ function Login() {
             password: details.password
           }
         );
- 
+        notifications.showNotification({
+          title: "Successfully login ",
+          message: "Welcome to ABAEC !",
+          icon: <Check size={18} />,
+          autoClose: 1000,
+          color: "teal"
+        });
+
         localStorage.setItem("user", response.data.data);
         auth.login(response.data.data);
         const results = await axios.post(
@@ -43,6 +53,7 @@ function Login() {
           type: "SET_EMAIL",
           email: results.data.results[0].email
         });
+
         navigate(-1);
       } catch (error) {
         console.log(error);

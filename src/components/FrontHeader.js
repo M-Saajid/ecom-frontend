@@ -5,9 +5,14 @@ import Search from "./Search";
 import { useStateValue } from "./StateProvider";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "./auth";
+import { useNotifications } from "@mantine/notifications";
+import { Check } from "@material-ui/icons";
+import { green, grey } from "@mui/material/colors";
 
 function FrontHeader() {
   const navigate = useNavigate();
+  const notifications = useNotifications();
+
   const userName = localStorage.getItem("user");
   console.log("local storage user", userName);
   const auth = useAuth();
@@ -24,6 +29,13 @@ function FrontHeader() {
 
   //loging out user and clear all caches
   const logout = () => {
+    notifications.showNotification({
+      title: "Successfully Logout ",
+      message: "Thanks for choosing  ABAEC !",
+      icon: <Check size={18} />,
+      color: "gray",
+      autoClose: 1000
+    });
     auth.logout();
     localStorage.clear();
     navigate("/");

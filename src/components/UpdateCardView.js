@@ -4,8 +4,11 @@ import "../style/UpdateCardView.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import validate from "../validations/UpdateProduct";
+import { useNotifications } from "@mantine/notifications";
+import { CheckIcon } from "@modulz/radix-icons";
 
 function UpdateCardView() {
+  const notifications = useNotifications();
   const [{ updateBucket }] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,6 +65,24 @@ function UpdateCardView() {
           data
         );
         console.log("this is api response ", response);
+
+        // notification settings
+        const id = notifications.showNotification({
+          loading: true,
+          title: "Updated the product",
+          message: "update successfull",
+          autoClose: false,
+          disallowClose: true
+        });
+        setTimeout(() => {
+          notifications.updateNotification(id, {
+            id,
+            color: "teal",
+            title: "Updated  the product",
+            icon: <CheckIcon />,
+            autoClose: 500
+          });
+        }, 500);
       } catch (error) {
         console.log(error);
         alert(error);

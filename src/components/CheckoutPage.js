@@ -28,16 +28,6 @@ function CheckoutPage() {
               <h2 className="checkout__title">Your shopping Basket</h2>
               {/*  view the  products were we  dispatch from cart so user can confirm the items  */}
               {basket.map((item) => (
-                /* <CheckoutProduct
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  price={item.price}
-                  image={item.image}
-                  rating={item.rating}
-                  description={item.description}
-                  quantity={item.quantity}
-                /> */
                 <CheckoutCard
                   key={item.id}
                   id={item.id}

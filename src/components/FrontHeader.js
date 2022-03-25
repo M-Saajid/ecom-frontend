@@ -42,7 +42,7 @@ function FrontHeader() {
   };
 
   const check = () => {
-    if (userName === process.env.REACT_APP_ADMIN) {
+    if (userName) {
       navigate("/addminview");
     } else {
       navigate("/register");
@@ -67,9 +67,12 @@ function FrontHeader() {
         </div>
         <div className="create__Account">
           {/* verify the user as admin or the customer */}
-          <NavLink style={navLink} to={"/addminview"}>
-            {!userName ? <h4>Create an account</h4> : <h4>{userName}</h4>}
-          </NavLink>
+
+          {!userName ? (
+            <h4 onClick={check}>Create an account</h4>
+          ) : (
+            <h4 onClick={check}>{userName}</h4>
+          )}
         </div>
       </div>
     </div>

@@ -23,16 +23,6 @@ function Product() {
     <div className="Product">
       {itemDetail.map((c) => {
         return (
-          /* <Card
-            key={c._id}
-            id={c._id}
-            image={c.image}
-            title={c.title}
-            description={c.description}
-            price={c.price}
-            rating={c.rating}
-            quantity={c.quantity}
-          /> */
           <ProductCard
             key={c._id}
             id={c._id}

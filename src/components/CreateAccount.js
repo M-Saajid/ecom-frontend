@@ -3,19 +3,35 @@ import React, { useEffect, useState } from "react";
 import "../style/CreateAccount.css";
 import { useNavigate } from "react-router-dom";
 import validate from "../validations/Register";
-
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 function CreateAccount() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [details, setDetails] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
+    showPassword: false
   });
   const [errors, setErrors] = useState({});
 
   //onhandling the  input values
-  const handleChange = (e) => {
+  const handleChange = (prop) => (event) => {
+    setDetails({ ...details, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setDetails({
+      ...details,
+      showPassword: !details.showPassword
+    });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleChanges = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {
       return {
@@ -60,31 +76,63 @@ function CreateAccount() {
           alt="/"
         />
         <div className="register__Container">
-          <input
+          <TextField
+            error={errors.username && true}
+            helperText={errors.username && "Username Required !"}
+            id="outlined-basic"
+            label="username"
+            name="username"
+            variant="outlined"
+            size="small"
+            value={details.username}
+            sx={{ m: 1, width: "25ch" }}
+            onChange={handleChange("username")}
+          />
+          <TextField
+            error={errors.email && true}
+            helperText={errors.email && `${errors.email} !`}
+            type="email"
+            id="outlined-basic"
+            label="Email"
+            name="email"
+            variant="outlined"
+            size="small"
+            value={details.email}
+            sx={{ m: 1, width: "25ch" }}
+            onChange={handleChange("email")}
+          />
+
+          {/* <input
             onChange={handleChange}
             type="text"
             name="username"
             placeholder="Enter the username"
             value={details.username}
           ></input>
-          {errors.username && <p>{errors.username}</p>}
-          <input
-            onChange={handleChange}
-            type="email"
-            name="email"
-            placeholder="Enter the Email"
-            value={details.email}
-          ></input>
-          {errors.email && <p>{errors.email}</p>}
-
-          <input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            placeholder="Enter the password"
+          {errors.username && <p>{errors.username}</p>} */}
+          <TextField
+            sx={{ m: 1, width: "25ch" }}
+            error={errors.password && true}
+            helperText={errors.password && "Password Required !"}
+            id="outlined-basic"
+            label="Password"
+            size="small"
+            type={details.showPassword ? "text" : "password"}
             value={details.password}
-          ></input>
-          {errors.password && <p>{errors.password}</p>}
+            onChange={handleChange("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {details.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
 
           <button type="submit" onClick={handleSubmit} className="Signin">
             Register

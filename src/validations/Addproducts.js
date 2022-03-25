@@ -1,24 +1,24 @@
-export default function validateInfo(values, files) {
+export default function validateInfo(details, files, values) {
   let errors = {};
 
-  if (!values.title) {
+  if (!details.title) {
     errors.title = "title required";
   }
-  if (isNaN(values.price) || !values.price) {
+  if (isNaN(details.price) || !details.price) {
     errors.price = "Number is invalid ";
-  } else if (!values.price) {
+  } else if (!details.price) {
     errors.price = "price required";
   }
-  if (!values.desc) {
+  if (!details.desc) {
     errors.desc = "Description required";
   }
-  if (!values.rating||isNaN(values.rating) || values.rating < 1 || values.rating > 5) {
+  if (!values) {
     errors.rating = "Rating must be between 1-5";
   }
-  if (!values.quantity || isNaN(values.quantity)) {
+  if (!details.quantity || isNaN(details.quantity)) {
     errors.quantity = "Quantity invalid";
   }
-  if (!values.category) {
+  if (!details.category) {
     errors.category = "Category required";
   }
   if (!files) {

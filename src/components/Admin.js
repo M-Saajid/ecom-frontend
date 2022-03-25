@@ -5,10 +5,13 @@ import { useNavigate } from "react-router-dom";
 import validate from "../validations/Addproducts";
 import { useNotifications } from "@mantine/notifications";
 import { CheckIcon } from "@modulz/radix-icons";
+import { Rating, TextField } from "@mui/material";
 
 function Admin() {
   const navigate = useNavigate();
   const notifications = useNotifications();
+  const [values, setValues] = useState(false);
+
   //check user is clicked the submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -31,7 +34,7 @@ function Admin() {
   const send = async (e) => {
     e.preventDefault();
     console.log("this is the file", files);
-    setErrors(validate(details, files));
+    setErrors(validate(details, files,values));
     setIsSubmitting(true);
   };
 
@@ -42,7 +45,7 @@ function Admin() {
       data.append("title", details.title);
       data.append("description", details.desc);
       data.append("price", details.price);
-      data.append("rating", details.rating);
+      data.append("rating", values);
       data.append("quantity", details.quantity);
       data.append("category", details.category);
       data.append("productImage", files);
@@ -52,24 +55,23 @@ function Admin() {
           data
         );
         console.log(response);
-          // notification settings
-          const id = notifications.showNotification({
-            loading: true,
-            title: "Product added Successful ",
-            message:
-             "update successfull",
-            autoClose: false,
-            disallowClose: true
+        // notification settings
+        const id = notifications.showNotification({
+          loading: true,
+          title: "Product added Successful ",
+          message: "update successfull",
+          autoClose: false,
+          disallowClose: true
+        });
+        setTimeout(() => {
+          notifications.updateNotification(id, {
+            id,
+            color: "teal",
+            title: "Product added Successful",
+            icon: <CheckIcon />,
+            autoClose: 500
           });
-          setTimeout(() => {
-            notifications.updateNotification(id, {
-              id,
-              color: "teal",
-              title: "Product added Successful",
-              icon: <CheckIcon />,
-              autoClose: 500
-            });
-          }, 1000);
+        }, 1000);
 
         navigate("/addminview");
       } catch (error) {
@@ -85,7 +87,23 @@ function Admin() {
         <form className="admin__form">
           <div className="admin__detail">
             <div className="input__Fields">
-              <p>Tittle</p>
+              <TextField
+                error={errors.title && true}
+                helperText={errors.title && `${errors.title}`}
+                id="outlined-basic"
+                label="Enter the tittle"
+                name="title"
+                variant="outlined"
+                size="small"
+                onChange={handleChange}
+                sx={{
+                  m: 1,
+                  width: "25ch",
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                }}
+              />
+              {/* <p>Tittle</p>
               <input
                 type="text"
                 className="input__fields"
@@ -94,10 +112,26 @@ function Admin() {
                 onChange={handleChange}
                 value={details.title}
               />
-              {errors.title && <p className="alert">{errors.title}</p>}
+              {errors.title && <p className="alert">{errors.title}</p>} */}
             </div>
             <div className="input__Fields">
-              <p>Price LKR</p>
+              <TextField
+                error={errors.price && true}
+                helperText={errors.price && `${errors.price}`}
+                id="outlined-basic"
+                label="Enter the price"
+                name="price"
+                variant="outlined"
+                size="small"
+                onChange={handleChange}
+                sx={{
+                  m: 1,
+                  width: "25ch",
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                }}
+              />
+              {/* <p>Price LKR</p>
               <input
                 type="text"
                 className="input__fields"
@@ -106,10 +140,26 @@ function Admin() {
                 onChange={handleChange}
                 value={details.price}
               />
-              {errors.price && <p className="alert">{errors.price}</p>}
+              {errors.price && <p className="alert">{errors.price}</p>} */}
             </div>
             <div className="input__Fields">
-              <p>Description</p>
+              <TextField
+                error={errors.desc && true}
+                helperText={errors.desc && `${errors.desc}`}
+                id="outlined-basic"
+                label="Enter the description"
+                name="desc"
+                variant="outlined"
+                size="small"
+                onChange={handleChange}
+                sx={{
+                  m: 1,
+                  width: "25ch",
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                }}
+              />
+              {/* <p>Description</p>
               <input
                 type="text"
                 className="input__fields"
@@ -118,22 +168,36 @@ function Admin() {
                 onChange={handleChange}
                 value={details.desc}
               />
-              {errors.desc && <p className="alert">{errors.desc}</p>}
+              {errors.desc && <p className="alert">{errors.desc}</p>} */}
             </div>
             <div className="input__Fields">
-              <p>Rating</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="rating"
-                placeholder="Enter the rating "
-                onChange={handleChange}
-                value={details.rating}
+              <Rating
+                name="rate half-rating"
+                value={values}
+                onChange={(event, newValue) => {
+                  setValues(newValue);
+                }}
               />
-              {errors.rating && <p className="alert">{errors.rating}</p>}
+              {errors.rating && <p className="alert"> Rating required !</p>}
             </div>
             <div className="input__Fields">
-              <p>Quantity</p>
+              <TextField
+                error={errors.quantity && true}
+                helperText={errors.quantity && `${errors.quantity}`}
+                id="outlined-basic"
+                label="Enter the quantity"
+                name="quantity"
+                variant="outlined"
+                size="small"
+                onChange={handleChange}
+                sx={{
+                  m: 1,
+                  width: "25ch",
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                }}
+              />
+              {/* <p>Quantity</p>
               <input
                 type="text"
                 className="input__fields"
@@ -142,10 +206,26 @@ function Admin() {
                 onChange={handleChange}
                 value={details.quantity}
               />
-              {errors.quantity && <p className="alert">{errors.quantity}</p>}
+              {errors.quantity && <p className="alert">{errors.quantity}</p>} */}
             </div>
             <div className="input__Fields">
-              <p>category</p>
+              <TextField
+                error={errors.category && true}
+                helperText={errors.category && `${errors.category}`}
+                id="outlined-basic"
+                label="Enter the category"
+                name="category"
+                variant="outlined"
+                size="small"
+                onChange={handleChange}
+                sx={{
+                  m: 1,
+                  width: "25ch",
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                }}
+              />
+              {/* <p>category</p>
               <input
                 type="text"
                 className="input__fields"
@@ -154,7 +234,7 @@ function Admin() {
                 onChange={handleChange}
                 value={details.category}
               />
-              {errors.category && <p className="alert">{errors.category}</p>}
+              {errors.category && <p className="alert">{errors.category}</p>} */}
             </div>
             <input
               type="file"

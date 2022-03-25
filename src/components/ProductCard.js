@@ -68,12 +68,15 @@ function ProductCard(props) {
         </Group>
 
         <Text
-          size="sm" 
+          size="sm"
           style={{ color: secondaryColor, lineHeight: 1.5, marginLeft: 50 }}
         >
           {props.description} .
         </Text>
-        <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5, marginLeft: 50 }}>
+        <Text
+          size="sm"
+          style={{ color: secondaryColor, lineHeight: 1.5, marginLeft: 50 }}
+        >
           We have only {props.quantity} PCS
         </Text>
         <h4 className="price">LKR {props.price}</h4>
@@ -86,6 +89,7 @@ function ProductCard(props) {
           fullWidth
           style={{ marginTop: 14 }}
           onClick={addToBasket}
+          disabled={props.quantity == 0 && "true"}
         >
           ADD TO CART
           <AddShoppingCartIcon style={{ marginLeft: 20 }} />

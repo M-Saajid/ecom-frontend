@@ -5,13 +5,11 @@ import { useAuth } from "./auth";
 
 export const RequireAuth = ({ children }) => {
   const userName = localStorage.getItem("user");
-  useEffect(() => {
-    if (userName === process.env.REACT_APP_ADMIN) {
-      return <AdminItems />;
-    } else {
-      return <Login />;
-    }
-  }, []);
+  if (userName === process.env.REACT_APP_ADMIN) {
+    return <AdminItems />;
+  } else {
+    return <Login />;
+  }
 
   return children;
 };

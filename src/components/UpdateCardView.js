@@ -13,7 +13,7 @@ function UpdateCardView() {
   const [{ updateBucket }] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [values, setValues] = useState(false);
+  const [values, setValues] = useState(0);
 
   const [errors, setErrors] = useState({});
   const updateBucketItem = updateBucket[0];

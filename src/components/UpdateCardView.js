@@ -88,7 +88,6 @@ function UpdateCardView() {
         }, 500);
       } catch (error) {
         console.log(error);
-        alert(error);
       }
       navigate(-1);
     }

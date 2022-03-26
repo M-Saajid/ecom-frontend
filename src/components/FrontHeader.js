@@ -35,8 +35,6 @@ function FrontHeader() {
   const check = () => {
     if (userName === process.env.REACT_APP_ADMIN) {
       navigate("/addminview");
-    } else {
-      navigate("/register");
     }
   };
 
@@ -84,7 +82,7 @@ function FrontHeader() {
             position="right"
             opened={userName ? false : opened}
             transition="rotate-left"
-            transitionDuration={250}
+            transitionDuration={550}
             transitionTimingFunction="ease"
             onClose={() => setOpened(false)}
             size="xl"

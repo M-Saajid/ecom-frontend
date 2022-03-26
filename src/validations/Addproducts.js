@@ -22,7 +22,7 @@ export default function validateInfo(details, files, values) {
     errors.category = "Category required";
   }
   if (!files) {
-    alert("Image required please select an image");
+    errors.files="Image required !";
   }
 
   return errors;

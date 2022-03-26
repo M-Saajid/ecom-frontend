@@ -81,12 +81,18 @@ function Login() {
   }, [errors]);
 
   // authenticate login and dispatch user details to reducer
+  const keyPressEvent = (e) => {
+    if (e.key === "Enter") {
+      setErrors(validate(details));
+      setIsSubmitting(true);
+      auth.login(details.username);
+    }
+  };
   const handleSubmit = (e) => {
     setErrors(validate(details));
     setIsSubmitting(true);
     auth.login(details.username);
   };
-
   return (
     <div className="login">
       <div className="login__Banner">
@@ -107,6 +113,7 @@ function Login() {
             value={details.username}
             sx={{ m: 1, width: "25ch" }}
             onChange={handleChange("username")}
+            onKeyPress={keyPressEvent}
           />
           <TextField
             sx={{ m: 1, width: "25ch" }}
@@ -118,6 +125,7 @@ function Login() {
             type={details.showPassword ? "text" : "password"}
             value={details.password}
             onChange={handleChange("password")}
+            onKeyPress={keyPressEvent}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -131,11 +139,9 @@ function Login() {
               </InputAdornment>
             }
           />
-
           <button type="submit" onClick={handleSubmit} className="Signin">
             Sign in
           </button>
-          {/* <div className="divider" /> */}
         </div>
         {/* <Loginsocial /> */}
       </div>

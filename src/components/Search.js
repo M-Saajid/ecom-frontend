@@ -17,12 +17,14 @@ function Search() {
     setSearch(event.target.value);
   };
 
-  const send = (req, res) => {
-    dispatch({
-      type: "SET_SEARCH_KEY",
-      searchkey: search
-    });
-    navigate("/searchproduct");
+  const send = (e) => {
+    if (e.key === "Enter") {
+      dispatch({
+        type: "SET_SEARCH_KEY",
+        searchkey: search
+      });
+      navigate("/searchproduct");
+    }
   };
 
   return (

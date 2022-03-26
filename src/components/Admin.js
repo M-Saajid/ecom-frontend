@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import validate from "../validations/Addproducts";
 import { useNotifications } from "@mantine/notifications";
 import { CheckIcon } from "@modulz/radix-icons";
-import { Rating, TextField } from "@mui/material";
+import { Alert, Rating, Snackbar, TextField } from "@mui/material";
 
 function Admin() {
   const navigate = useNavigate();
   const notifications = useNotifications();
   const [values, setValues] = useState(false);
-
+  const [open, setOpen] = React.useState(false);
   //check user is clicked the submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -19,6 +19,19 @@ function Admin() {
   const [details, setDetails] = useState({});
   //handling the image file
   const [files, setFiles] = useState();
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   //onhandlechange the input values
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +47,9 @@ function Admin() {
   const send = async (e) => {
     e.preventDefault();
     console.log("this is the file", files);
-    setErrors(validate(details, files,values));
+
+    setErrors(validate(details, files, values));
+    setOpen(true);
     setIsSubmitting(true);
   };
 
@@ -103,16 +118,6 @@ function Admin() {
                   marginRight: "auto"
                 }}
               />
-              {/* <p>Tittle</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="title"
-                placeholder="Enter the title"
-                onChange={handleChange}
-                value={details.title}
-              />
-              {errors.title && <p className="alert">{errors.title}</p>} */}
             </div>
             <div className="input__Fields">
               <TextField
@@ -131,16 +136,6 @@ function Admin() {
                   marginRight: "auto"
                 }}
               />
-              {/* <p>Price LKR</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="price"
-                placeholder="Enter the price "
-                onChange={handleChange}
-                value={details.price}
-              />
-              {errors.price && <p className="alert">{errors.price}</p>} */}
             </div>
             <div className="input__Fields">
               <TextField
@@ -197,16 +192,6 @@ function Admin() {
                   marginRight: "auto"
                 }}
               />
-              {/* <p>Quantity</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="quantity"
-                placeholder="Enter the quantity "
-                onChange={handleChange}
-                value={details.quantity}
-              />
-              {errors.quantity && <p className="alert">{errors.quantity}</p>} */}
             </div>
             <div className="input__Fields">
               <TextField
@@ -225,16 +210,6 @@ function Admin() {
                   marginRight: "auto"
                 }}
               />
-              {/* <p>category</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="category"
-                placeholder="Enter the category "
-                onChange={handleChange}
-                value={details.category}
-              />
-              {errors.category && <p className="alert">{errors.category}</p>} */}
             </div>
             <input
               type="file"
@@ -244,10 +219,20 @@ function Admin() {
                 setFiles(file);
               }}
             />
+            {errors.filse && <p className="alert">{errors.filse}</p>}
           </div>
           <button type="submit" onClick={send}>
             Submit
           </button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Please fill the required field !
+            </Alert>
+          </Snackbar>
         </form>
       </div>
     </div>

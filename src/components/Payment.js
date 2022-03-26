@@ -8,10 +8,13 @@ import CheckoutCard from "./CheckoutCard";
 import { Baskettotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
 function Payment() {
   const navigate = useNavigate();
   const [{ basket, email }, dispatch] = useStateValue();
+  const [open, setOpen] = React.useState(false);
+
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -19,6 +22,18 @@ function Payment() {
   const [processing, setProcessingd] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
   const [disabled, setDisabled] = useState(true);
+  const handleClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const handleOPen = (reason) => {
+    if (reason == "clickaway") {
+    }
+    setOpen(true);
+  };
 
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
@@ -106,15 +121,15 @@ function Payment() {
           <div className="payment__items">
             {basket.map((item) => (
               <CheckoutCard
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  price={item.price}
-                  image={item.image}
-                  rating={item.rating}
-                  description={item.description}
-                  quantity={item.quantity}
-                />
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                image={item.image}
+                rating={item.rating}
+                description={item.description}
+                quantity={item.quantity}
+              />
             ))}
           </div>
         </div>
@@ -146,9 +161,23 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"LKR "}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button onClick={handleOPen} disabled={processing || disabled || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    Thanks for choosing ABAEC ! E-recipt has sent for your
+                    E-mail
+                  </Alert>
+                </Snackbar>
               </div>
               {/* errors handling */}
               {error && <div>{error}</div>}

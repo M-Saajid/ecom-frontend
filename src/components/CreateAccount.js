@@ -5,9 +5,19 @@ import { useNavigate } from "react-router-dom";
 import validate from "../validations/Register";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
 function CreateAccount() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const [details, setDetails] = useState({
     username: "",
     email: "",
@@ -46,7 +56,12 @@ function CreateAccount() {
     setErrors(validate(details));
     setIsSubmitting(true);
   };
-
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -59,10 +74,11 @@ function CreateAccount() {
             password: details.password
           }
         );
-        navigate("/product");
+        window.location.reload();
+        navigate("/");
       } catch (err) {
         console.log(err);
-        alert("User already exsist");
+        setOpen(true);
       }
     }
   }, [errors]);
@@ -102,14 +118,6 @@ function CreateAccount() {
             onChange={handleChange("email")}
           />
 
-          {/* <input
-            onChange={handleChange}
-            type="text"
-            name="username"
-            placeholder="Enter the username"
-            value={details.username}
-          ></input>
-          {errors.username && <p>{errors.username}</p>} */}
           <TextField
             sx={{ m: 1, width: "25ch" }}
             error={errors.password && true}
@@ -137,6 +145,22 @@ function CreateAccount() {
           <button type="submit" onClick={handleSubmit} className="Signin">
             Register
           </button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"User Exist "}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                User already exist please login or create a new User
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Ok</Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     </div>

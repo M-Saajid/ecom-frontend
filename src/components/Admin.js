@@ -154,16 +154,6 @@ function Admin() {
                   marginRight: "auto"
                 }}
               />
-              {/* <p>Description</p>
-              <input
-                type="text"
-                className="input__fields"
-                name="desc"
-                placeholder="Enter the Description "
-                onChange={handleChange}
-                value={details.desc}
-              />
-              {errors.desc && <p className="alert">{errors.desc}</p>} */}
             </div>
             <div className="input__Fields">
               <Rating

@@ -18,8 +18,8 @@ function FrontHeader() {
   const notifications = useNotifications();
   const [opened, setOpened] = useState(false);
   const [pageView, setPageView] = useState();
-
   const userName = localStorage.getItem("user");
+  const createdUser = localStorage.getItem("createdUser");
   console.log("local storage user", userName);
   const auth = useAuth();
 
@@ -32,9 +32,14 @@ function FrontHeader() {
         : "rgba(255, 255, 255, 0.836)"
     };
   };
+  if(!(opened&&createdUser)){
+
+  }
   const check = () => {
     if (userName === process.env.REACT_APP_ADMIN) {
       navigate("/addminview");
+    } else {
+      navigate("/");
     }
   };
 
@@ -80,7 +85,7 @@ function FrontHeader() {
           {/* verify the user as admin or the customer */}
           <Drawer
             position="right"
-            opened={userName ? false : opened}
+            opened={userName ? false : opened }
             transition="rotate-left"
             transitionDuration={550}
             transitionTimingFunction="ease"

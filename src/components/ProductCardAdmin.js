@@ -143,17 +143,15 @@ function ProductCard(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Confirm delete "}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Confirm delete "}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-           Are you sure you need to  delete this item .
+            Are you sure you need to delete this item .
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={DeleteItem}  autoFocus>
+          <Button onClick={DeleteItem} autoFocus>
             Agree
           </Button>
         </DialogActions>

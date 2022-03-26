@@ -53,11 +53,11 @@ function App() {
           <Route
             path="/payment"
             element={
-              // <RequireAuth>
+              <RequireAuth>
               <Elements stripe={promise}>
                 <Payment />
               </Elements>
-              // </RequireAuth>
+               </RequireAuth>
             }
           ></Route>
         </Routes>{" "}

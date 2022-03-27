@@ -13,15 +13,13 @@ function UpdateCardView() {
   const [{ updateBucket }] = useStateValue();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [values, setValues] = useState(0);
-
   const [errors, setErrors] = useState({});
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
   // constricting image url
   const imageArray = updateBucket[0].image.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
-  console.log("this is image in card", imageUrl);
+  console.log("this is  update bucket", updateBucket);
   //setting details to previes value
   const [details, setDetails] = useState({
     title: updateBucketItem.title,
@@ -32,6 +30,7 @@ function UpdateCardView() {
     category: updateBucketItem.category
   });
 
+  const [values, setValues] = useState(updateBucket[0].rating);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {
@@ -50,6 +49,7 @@ function UpdateCardView() {
 
   useEffect(async () => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
+      console.log("updating image", files);
       const data = new FormData();
       data.append("productImage", files);
       data.append("title", details.title);

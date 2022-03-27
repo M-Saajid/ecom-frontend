@@ -10,10 +10,18 @@ import { useNotifications } from "@mantine/notifications";
 import { Check, Visibility } from "@material-ui/icons";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { VisibilityOff } from "@mui/icons-material";
-
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
 function Login() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const notifications = useNotifications();
   const auth = useAuth();
 
@@ -28,7 +36,9 @@ function Login() {
   const handleChange = (prop) => (event) => {
     setDetails({ ...details, [prop]: event.target.value });
   };
-
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleClickShowPassword = () => {
     setDetails({
       ...details,
@@ -75,7 +85,7 @@ function Login() {
         navigate("/");
       } catch (error) {
         console.log(error);
-        alert("credential you entered incorrect,Please try again", error);
+        setOpen(true);
       }
     }
   }, [errors]);
@@ -142,6 +152,22 @@ function Login() {
           <button type="submit" onClick={handleSubmit} className="Signin">
             Sign in
           </button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Access denied "}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Username or Password Invalid , Please check !
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Ok</Button>
+            </DialogActions>
+          </Dialog>
         </div>
         {/* <Loginsocial /> */}
       </div>

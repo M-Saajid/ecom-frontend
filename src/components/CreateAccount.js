@@ -41,15 +41,7 @@ function CreateAccount() {
     event.preventDefault();
   };
 
-  const handleChanges = (e) => {
-    const { name, value } = e.target;
-    setDetails((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value
-      };
-    });
-  };
+
 
   // register the user  and navigate to the products
   const handleSubmit = (e) => {
@@ -59,9 +51,7 @@ function CreateAccount() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+ 
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {

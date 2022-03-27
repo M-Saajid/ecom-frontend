@@ -14,7 +14,7 @@ function Payment() {
   const navigate = useNavigate();
   const [{ basket, email }, dispatch] = useStateValue();
   const [open, setOpen] = React.useState(false);
-
+  const user = localStorage.getItem("user");
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -38,12 +38,16 @@ function Payment() {
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/payment/create?total=${Baskettotal(
-          basket
-        )}`
-      );
-      setClientSecret(response.data.clientSecret);
+      if (!basket.length == 0) {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/payment/create?total=${Baskettotal(
+            basket
+          )}`
+        );
+        setClientSecret(response.data.clientSecret);
+      } else {
+        navigate("/product");
+      }
     };
     getClientSecret();
   }, []);
@@ -161,7 +165,10 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"LKR "}
                 />
-                <button onClick={handleOPen} disabled={processing || disabled || succeeded}>
+                <button
+                  onClick={handleOPen}
+                  disabled={processing || disabled || succeeded}
+                >
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
                 <Snackbar

@@ -86,7 +86,7 @@ function ProductCard(props) {
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Image
-            src="https://5.imimg.com/data5/VB/NM/KZ/SELLER-6129601/man-s-cargo-pant-500x500.jpg"
+            src={imageUrl}
             height={160}
             alt="Norway"
           />

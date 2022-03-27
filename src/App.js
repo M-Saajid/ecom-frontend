@@ -19,6 +19,7 @@ import UpdateCardView from "./components/UpdateCardView";
 import { AuthProvider } from "./components/auth";
 import { RequireAuth } from "./components/RequireAuth";
 import ProductCard from "./components/ProductCard";
+import { AdminRegectPayment } from "./components/AdminRegectPayment";
 const promise = loadStripe(
   "pk_test_51J887XGHMWtYg6xLPWmnzfUQWvaLVp4z3DE5k2pjp8ZDJlvD2DFTxUu0J83gkzaUSrriT9g88J5NXM6TMbyn57aP00jnr1t036"
 );
@@ -53,11 +54,11 @@ function App() {
           <Route
             path="/payment"
             element={
-              <RequireAuth>
-              <Elements stripe={promise}>
-                <Payment />
-              </Elements>
-               </RequireAuth>
+              <AdminRegectPayment>
+                <Elements stripe={promise}>
+                  <Payment />
+                </Elements>
+              </AdminRegectPayment>
             }
           ></Route>
         </Routes>{" "}

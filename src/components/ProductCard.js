@@ -50,11 +50,7 @@ function ProductCard(props) {
     >
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image
-            src="https://5.imimg.com/data5/VB/NM/KZ/SELLER-6129601/man-s-cargo-pant-500x500.jpg"
-            height={160}
-            alt="Norway"
-          />
+          <Image src={imageUrl} height={160} alt="Norway" />
         </Card.Section>
 
         <Group
@@ -89,7 +85,7 @@ function ProductCard(props) {
           fullWidth
           style={{ marginTop: 14 }}
           onClick={addToBasket}
-          disabled={props.quantity == 0 && "true"}
+          disabled={props.quantity == 0 ? true : false}
         >
           ADD TO CART
           <AddShoppingCartIcon style={{ marginLeft: 20 }} />

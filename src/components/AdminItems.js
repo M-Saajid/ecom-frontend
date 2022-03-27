@@ -43,17 +43,6 @@ function AdminItems() {
         {/* view all items to admin  */}
         {itemDetail.map((c) => {
           return (
-            /* <AdminProduct
-              key={c._id}
-              id={c._id}
-              image={c.image}
-              title={c.title}
-              description={c.description}
-              price={c.price}
-              rating={c.rating}
-              category={c.category}
-              quantity={c.quantity}
-            /> */
             <ProductCardAdmin
               key={c._id}
               id={c._id}

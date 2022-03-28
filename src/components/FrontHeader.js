@@ -32,8 +32,7 @@ function FrontHeader() {
         : "rgba(255, 255, 255, 0.836)"
     };
   };
-  if(!(opened&&createdUser)){
-
+  if (!(opened && createdUser)) {
   }
   const check = () => {
     if (userName === process.env.REACT_APP_ADMIN) {
@@ -56,6 +55,7 @@ function FrontHeader() {
     setOpened(false);
     localStorage.clear();
     navigate("/");
+    window.location.reload();
   };
 
   const login = () => {
@@ -85,7 +85,7 @@ function FrontHeader() {
           {/* verify the user as admin or the customer */}
           <Drawer
             position="right"
-            opened={userName ? false : opened }
+            opened={userName ? false : opened}
             transition="rotate-left"
             transitionDuration={550}
             transitionTimingFunction="ease"

@@ -12,8 +12,6 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useStateValue } from "./StateProvider";
 import {
-  autocompleteClasses,
-  CardActions,
   Dialog,
   DialogActions,
   DialogContent,
@@ -28,6 +26,7 @@ function ProductCard(props) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const theme = useMantineTheme();
+  const token = localStorage.getItem("jwt");
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
   const [{}, dispatch] = useStateValue();
@@ -42,7 +41,10 @@ function ProductCard(props) {
   const DeleteItem = async () => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/api/items/${props.id}`
+        `${process.env.REACT_APP_BASE_URL}/api/items/${props.id}`,
+        {
+          headers: { authorization: token }
+        }
       );
       console.log(response);
       window.location.reload();
@@ -85,11 +87,7 @@ function ProductCard(props) {
     >
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image
-            src={imageUrl}
-            height={160}
-            alt="Norway"
-          />
+          <Image src={imageUrl} height={160} alt="Norway" />
         </Card.Section>
 
         <Group

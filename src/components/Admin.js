@@ -10,6 +10,8 @@ import { Alert, Rating, Snackbar, TextField } from "@mui/material";
 function Admin() {
   const navigate = useNavigate();
   const notifications = useNotifications();
+  const token = localStorage.getItem("jwt");
+
   const [values, setValues] = useState(false);
   const [open, setOpen] = React.useState(false);
   //check user is clicked the submit button
@@ -67,7 +69,10 @@ function Admin() {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/items`,
-          data
+          data,
+          {
+            headers: { authorization: token }
+          }
         );
         console.log(response);
         // notification settings

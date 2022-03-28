@@ -68,7 +68,7 @@ function Login() {
           autoClose: 1000,
           color: "teal"
         });
-
+        localStorage.setItem("jwt", "Bearer " + response.data.token);
         localStorage.setItem("user", response.data.data);
         auth.login(response.data.data);
         const results = await axios.post(
@@ -158,7 +158,9 @@ function Login() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Access denied "}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">
+              {"Access denied "}
+            </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 Username or Password Invalid , Please check !

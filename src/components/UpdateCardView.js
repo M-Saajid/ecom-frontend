@@ -16,6 +16,8 @@ function UpdateCardView() {
   const [errors, setErrors] = useState({});
   const updateBucketItem = updateBucket[0];
   const [files, setFiles] = useState();
+  const token = localStorage.getItem("jwt");
+  console.log("this is the tocken", token);
   // constricting image url
   const imageArray = updateBucket[0].image.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
@@ -29,7 +31,6 @@ function UpdateCardView() {
     quantity: updateBucketItem.quantity,
     category: updateBucketItem.category
   });
-
   const [values, setValues] = useState(updateBucket[0].rating);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,7 +66,10 @@ function UpdateCardView() {
       try {
         const response = await axios.patch(
           `${process.env.REACT_APP_BASE_URL}/api/items/${updateBucketItem.id}`,
-          data
+          data,
+          {
+            headers: { authorization: token }
+          }
         );
         console.log("this is api response ", response);
 

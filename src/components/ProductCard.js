@@ -85,7 +85,7 @@ function ProductCard(props) {
           fullWidth
           style={{ marginTop: 14 }}
           onClick={addToBasket}
-          disabled={props.quantity == 0 ? true : false}
+          disabled={props.quantity < 1 ? true : false}
         >
           ADD TO CART
           <AddShoppingCartIcon style={{ marginLeft: 20 }} />

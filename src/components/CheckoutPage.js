@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/Checkout.css";
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutCard from "./CheckoutCard";
 import Subtotal from "./Subtotal";
 import { useStateValue } from "./StateProvider";
 
@@ -28,7 +28,7 @@ function CheckoutPage() {
               <h2 className="checkout__title">Your shopping Basket</h2>
               {/*  view the  products were we  dispatch from cart so user can confirm the items  */}
               {basket.map((item) => (
-                <CheckoutProduct
+                <CheckoutCard
                   key={item.id}
                   id={item.id}
                   title={item.title}

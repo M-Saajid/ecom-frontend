@@ -4,14 +4,17 @@ import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
 import "../style/Payment.css";
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutCard from "./CheckoutCard";
 import { Baskettotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
 function Payment() {
   const navigate = useNavigate();
   const [{ basket, email }, dispatch] = useStateValue();
+  const [open, setOpen] = React.useState(false);
+  const user = localStorage.getItem("user");
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -19,16 +22,32 @@ function Payment() {
   const [processing, setProcessingd] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
   const [disabled, setDisabled] = useState(true);
+  const handleClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const handleOPen = (reason) => {
+    if (reason == "clickaway") {
+    }
+    setOpen(true);
+  };
 
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
     const getClientSecret = async () => {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/payment/create?total=${Baskettotal(
-          basket
-        )}`
-      );
-      setClientSecret(response.data.clientSecret);
+      if (!basket.length == 0) {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/payment/create?total=${Baskettotal(
+            basket
+          )}`
+        );
+        setClientSecret(response.data.clientSecret);
+      } else {
+        navigate("/product");
+      }
     };
     getClientSecret();
   }, []);
@@ -105,14 +124,15 @@ function Payment() {
           </div>
           <div className="payment__items">
             {basket.map((item) => (
-              <CheckoutProduct
+              <CheckoutCard
                 key={item.id}
                 id={item.id}
-                tittle={item.tittle}
+                title={item.title}
                 price={item.price}
                 image={item.image}
                 rating={item.rating}
                 description={item.description}
+                quantity={item.quantity}
               />
             ))}
           </div>
@@ -145,9 +165,26 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"LKR "}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button
+                  onClick={handleOPen}
+                  disabled={processing || disabled || succeeded}
+                >
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    Thanks for choosing ABAEC ! E-recipt has sent for your
+                    E-mail
+                  </Alert>
+                </Snackbar>
               </div>
               {/* errors handling */}
               {error && <div>{error}</div>}

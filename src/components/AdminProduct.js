@@ -4,10 +4,10 @@ import "../style/AdminProducts.css";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
 
+
 function AdminProduct(props) {
   const navigate = useNavigate();
   const [{}, dispatch] = useStateValue();
-
   // replacing file "\\" into "//" in image path
   const fileUrl = props.image.replace(/\\/g, "/");
   // split all th "/" get the image into array
@@ -28,9 +28,10 @@ function AdminProduct(props) {
       console.log(error);
     }
   };
-  
+
   //upload the item to reducer so admin can update the specific from the update ui
   const UpdateItem = () => {
+
     dispatch({
       type: "ADD_TO_UPDATES",
       item: {

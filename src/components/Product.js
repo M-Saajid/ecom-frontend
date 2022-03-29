@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../style/Product.css";
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 
 function Product() {
   const [itemDetail, setitemDetail] = useState([]);
-  
+
   // view all product
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +23,7 @@ function Product() {
     <div className="Product">
       {itemDetail.map((c) => {
         return (
-          <Card
+          <ProductCard
             key={c._id}
             id={c._id}
             image={c.image}

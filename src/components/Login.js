@@ -6,18 +6,49 @@ import { useStateValue } from "./StateProvider";
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
-import { AtmSharp } from "@material-ui/icons";
+import { useNotifications } from "@mantine/notifications";
+import { Check, Visibility } from "@material-ui/icons";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { VisibilityOff } from "@mui/icons-material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
 function Login() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const notifications = useNotifications();
+  const auth = useAuth();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [details, setDetails] = useState({
     username: "",
-    password: ""
+    password: "",
+    showPassword: false
   });
 
-  const auth = useAuth();
+  const handleChange = (prop) => (event) => {
+    setDetails({ ...details, [prop]: event.target.value });
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClickShowPassword = () => {
+    setDetails({
+      ...details,
+      showPassword: !details.showPassword
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   useEffect(async () => {
     // check if any validation errors are present
@@ -30,7 +61,14 @@ function Login() {
             password: details.password
           }
         );
- 
+        notifications.showNotification({
+          title: "Successfully login ",
+          message: "Welcome to ABAEC !",
+          icon: <Check size={18} />,
+          autoClose: 1000,
+          color: "teal"
+        });
+        localStorage.setItem("jwt", "Bearer " + response.data.token);
         localStorage.setItem("user", response.data.data);
         auth.login(response.data.data);
         const results = await axios.post(
@@ -43,32 +81,28 @@ function Login() {
           type: "SET_EMAIL",
           email: results.data.results[0].email
         });
-        navigate(-1);
+
+        navigate("/");
       } catch (error) {
         console.log(error);
-        alert("credential you entered incorrect,Please try again", error);
+        setOpen(true);
       }
     }
   }, [errors]);
 
-  //handle login change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value
-      };
-    });
-  };
-
   // authenticate login and dispatch user details to reducer
+  const keyPressEvent = (e) => {
+    if (e.key === "Enter") {
+      setErrors(validate(details));
+      setIsSubmitting(true);
+      auth.login(details.username);
+    }
+  };
   const handleSubmit = (e) => {
     setErrors(validate(details));
     setIsSubmitting(true);
     auth.login(details.username);
   };
-
   return (
     <div className="login">
       <div className="login__Banner">
@@ -78,28 +112,66 @@ function Login() {
           alt="/"
         />
         <div className="login__Container">
-          <input
-            type="text"
-            onChange={handleChange}
+          <TextField
+            error={errors.username && true}
+            helperText={errors.username && "Username Required !"}
+            id="outlined-basic"
+            label="username"
             name="username"
-            placeholder="Enter the Username"
+            variant="outlined"
+            size="small"
             value={details.username}
-          ></input>
-          {errors.username && <p>{errors.username}</p>}
-          <input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            placeholder="Enter the password"
+            sx={{ m: 1, width: "25ch" }}
+            onChange={handleChange("username")}
+            onKeyPress={keyPressEvent}
+          />
+          <TextField
+            sx={{ m: 1, width: "25ch" }}
+            error={errors.password && true}
+            helperText={errors.password && "Password Required !"}
+            id="outlined-basic"
+            label="Password"
+            size="small"
+            type={details.showPassword ? "text" : "password"}
             value={details.password}
-          ></input>
-          {errors.password && <p>{errors.password}</p>}
+            onChange={handleChange("password")}
+            onKeyPress={keyPressEvent}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {details.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
           <button type="submit" onClick={handleSubmit} className="Signin">
             Sign in
           </button>
-          <div className="divider" />
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Access denied "}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Username or Password Invalid , Please check !
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Ok</Button>
+            </DialogActions>
+          </Dialog>
         </div>
-        <Loginsocial />
+        {/* <Loginsocial /> */}
       </div>
     </div>
   );

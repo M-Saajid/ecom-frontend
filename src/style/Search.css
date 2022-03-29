@@ -1,9 +1,9 @@
-.search{
+/* .search{
     border: 1px solid black;
     display: flex;
     flex-direction: row;
    
-}
+} */
 .search__Text{
     width: 100%;
     text-align: center;

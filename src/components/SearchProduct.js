@@ -4,10 +4,10 @@ import ProductCard from "./ProductCard";
 import { useStateValue } from "../store/StateProvider";
 
 function SearchProduct() {
-  const [{ search }] = useStateValue();
   const [searchResults, setSearcResults] = useState({});
+  const search = localStorage.getItem("searchkey");
   console.log("this is search ", search);
-  
+
   useEffect(async () => {
     //  getting the all items where user search for
     if (search) {
@@ -36,15 +36,15 @@ function SearchProduct() {
         searchResults.map((c) => {
           return (
             <ProductCard
-            key={c._id}
-            id={c._id}
-            image={c.image}
-            title={c.title}
-            description={c.description}
-            price={c.price}
-            rating={c.rating}
-            quantity={c.quantity}
-          />
+              key={c._id}
+              id={c._id}
+              image={c.image}
+              title={c.title}
+              description={c.description}
+              price={c.price}
+              rating={c.rating}
+              quantity={c.quantity}
+            />
           );
         })
       ) : (

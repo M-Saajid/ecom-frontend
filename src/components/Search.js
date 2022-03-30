@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../style/Search.css";
-import { useStateValue } from "../store/StateProvider";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@mantine/core";
+import { At } from "tabler-icons-react";
 import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {
   const navigate = useNavigate();
   const [search, setSearch] = useState(" ");
-  const [{}, dispatch] = useStateValue();
 
+  const searchStore = localStorage.getItem("search");
   const handleChange = (event) => {
     setSearch(event.target.value);
   };
 
   const send = (e) => {
     if (e.key === "Enter") {
-      dispatch({
-        type: "SET_SEARCH_KEY",
-        searchkey: search
-      });
+      localStorage.setItem("searchkey", search);
       navigate("/searchproduct");
     }
   };

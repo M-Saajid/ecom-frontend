@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../style/AdminItems.css";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AdminProduct from "./AdminProduct";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import ProductCardAdmin from "./ProductCardAdmin";

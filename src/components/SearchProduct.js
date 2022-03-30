@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-import Card from "./Card";
 import ProductCard from "./ProductCard";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 
 function SearchProduct() {
   const [{ search }] = useStateValue();

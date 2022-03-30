@@ -2,7 +2,8 @@ import React from "react";
 import "../style/Checkout.css";
 import CheckoutCard from "./CheckoutCard";
 import Subtotal from "./Subtotal";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
+
 
 function CheckoutPage() {
   const [{ basket }] = useStateValue();

@@ -9,8 +9,6 @@ import {
   useMantineTheme,
   Center
 } from "@mantine/core";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useStateValue } from "./StateProvider";
 import {
   Dialog,
   DialogActions,
@@ -19,6 +17,7 @@ import {
   DialogTitle,
   Rating
 } from "@mui/material";
+import { useStateValue } from "../store/StateProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -27,16 +26,18 @@ function ProductCard(props) {
   const [open, setOpen] = useState(false);
   const theme = useMantineTheme();
   const token = localStorage.getItem("jwt");
+  const [{}, dispatch] = useStateValue();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  const [{}, dispatch] = useStateValue();
 
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   //   delete items
   const DeleteItem = async () => {
     try {
@@ -53,6 +54,7 @@ function ProductCard(props) {
       console.log(error);
     }
   };
+
   //upload the item to reducer so admin can update the specific from the update ui
   const UpdateItem = () => {
     dispatch({
@@ -70,6 +72,7 @@ function ProductCard(props) {
     });
     navigate("/addminUpdate");
   };
+
   //steps to  access the image through url
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");

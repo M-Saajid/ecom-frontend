@@ -13,11 +13,11 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+
 function CreateAccount() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [open, setOpen] = useState(false);
-
   const [details, setDetails] = useState({
     username: "",
     email: "",
@@ -37,21 +37,21 @@ function CreateAccount() {
       showPassword: !details.showPassword
     });
   };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-
 
   // register the user  and navigate to the products
   const handleSubmit = (e) => {
     setErrors(validate(details));
     setIsSubmitting(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
- 
+
   useEffect(async () => {
     // check if any validation errors are present
     if (Object.keys(errors).length === 0 && isSubmitting) {

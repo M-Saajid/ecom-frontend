@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PageviewIcon from "@material-ui/icons/Pageview";
 import "../style/Search.css";
-import axios from "axios";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@mantine/core";
-import { At } from "tabler-icons-react";
 import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {

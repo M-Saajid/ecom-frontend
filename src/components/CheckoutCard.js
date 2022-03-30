@@ -7,11 +7,10 @@ import {
   Button,
   Group,
   useMantineTheme,
-  Center
 } from "@mantine/core";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useStateValue } from "./StateProvider";
-import { autocompleteClasses, CardActions, Rating } from "@mui/material";
+import { useStateValue } from "../store/StateProvider";
+import {  Rating } from "@mui/material";
 function ProductCard(props) {
   const theme = useMantineTheme();
   const secondaryColor =

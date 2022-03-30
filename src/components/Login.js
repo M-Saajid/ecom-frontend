@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../style/Login.css";
 import { useNavigate } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 import validate from "../validations/Login";
 import Loginsocial from "./Loginsocial";
 import { useAuth } from "./auth";
@@ -18,13 +18,13 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+
 function Login() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const notifications = useNotifications();
   const auth = useAuth();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [details, setDetails] = useState({
@@ -36,9 +36,11 @@ function Login() {
   const handleChange = (prop) => (event) => {
     setDetails({ ...details, [prop]: event.target.value });
   };
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleClickShowPassword = () => {
     setDetails({
       ...details,
@@ -48,6 +50,21 @@ function Login() {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  // authenticate login and dispatch user details to reducer
+  const keyPressEvent = (e) => {
+    if (e.key === "Enter") {
+      setErrors(validate(details));
+      setIsSubmitting(true);
+      auth.login(details.username);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    setErrors(validate(details));
+    setIsSubmitting(true);
+    auth.login(details.username);
   };
 
   useEffect(async () => {
@@ -68,8 +85,10 @@ function Login() {
           autoClose: 1000,
           color: "teal"
         });
+
         localStorage.setItem("jwt", "Bearer " + response.data.token);
         localStorage.setItem("user", response.data.data);
+
         auth.login(response.data.data);
         const results = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/searchcus`,
@@ -90,19 +109,6 @@ function Login() {
     }
   }, [errors]);
 
-  // authenticate login and dispatch user details to reducer
-  const keyPressEvent = (e) => {
-    if (e.key === "Enter") {
-      setErrors(validate(details));
-      setIsSubmitting(true);
-      auth.login(details.username);
-    }
-  };
-  const handleSubmit = (e) => {
-    setErrors(validate(details));
-    setIsSubmitting(true);
-    auth.login(details.username);
-  };
   return (
     <div className="login">
       <div className="login__Banner">

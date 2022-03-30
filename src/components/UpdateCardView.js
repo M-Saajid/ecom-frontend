@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 import "../style/UpdateCardView.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,10 +18,12 @@ function UpdateCardView() {
   const [files, setFiles] = useState();
   const token = localStorage.getItem("jwt");
   console.log("this is the tocken", token);
+
   // constricting image url
   const imageArray = updateBucket[0].image.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
   console.log("this is  update bucket", updateBucket);
+
   //setting details to previes value
   const [details, setDetails] = useState({
     title: updateBucketItem.title,
@@ -31,7 +33,9 @@ function UpdateCardView() {
     quantity: updateBucketItem.quantity,
     category: updateBucketItem.category
   });
+
   const [values, setValues] = useState(updateBucket[0].rating);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prevValue) => {

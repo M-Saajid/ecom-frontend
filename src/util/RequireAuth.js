@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Login from "./Login";
-import AdminItems from "./AdminItems";
+import Login from "../components/Login";
+import AdminItems from "../components/AdminItems";
 
 export const RequireAuth = ({ children }) => {
   const userName = localStorage.getItem("user");

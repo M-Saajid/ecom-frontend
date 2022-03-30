@@ -1,17 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
 import "../style/FrontHeader.css";
 import Search from "./Search";
-import { useStateValue } from "./StateProvider";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "./auth";
 import { useNotifications } from "@mantine/notifications";
 import { Check } from "@material-ui/icons";
-import { green, grey } from "@mui/material/colors";
 import CreateAccount from "./CreateAccount";
 import Login from "./Login";
-
-import { Drawer, Button, Group } from "@mantine/core";
+import { Drawer } from "@mantine/core";
 
 function FrontHeader() {
   const navigate = useNavigate();
@@ -32,8 +28,7 @@ function FrontHeader() {
         : "rgba(255, 255, 255, 0.836)"
     };
   };
-  if (!(opened && createdUser)) {
-  }
+
   const check = () => {
     if (userName === process.env.REACT_APP_ADMIN) {
       navigate("/addminview");
@@ -62,6 +57,7 @@ function FrontHeader() {
     setPageView(true);
     setOpened(true);
   };
+
   const create = () => {
     setPageView(false);
     setOpened(true);

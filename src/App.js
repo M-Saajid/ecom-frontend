@@ -17,7 +17,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import SearchProduct from "./components/SearchProduct";
 import UpdateCardView from "./components/UpdateCardView";
 import { AuthProvider } from "./components/auth";
-import { RequireAuth } from "./components/RequireAuth";
+import { RequireAuth } from "./util/RequireAuth";
 import ProductCard from "./components/ProductCard";
 import { AdminRegectPayment } from "./components/AdminRegectPayment";
 const promise = loadStripe(

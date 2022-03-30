@@ -2,7 +2,7 @@ import React from "react";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import "../style/FrontNav.css";
 import { NavLink } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 
 function FrontNav() {
   const [{ basket }] = useStateValue();

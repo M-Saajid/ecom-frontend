@@ -1,8 +1,8 @@
 import React from "react";
 import CurrencyFormat from "react-currency-format";
 import "../style/Subtotal.css";
-import { Baskettotal } from "./reducer";
-import { useStateValue } from "./StateProvider";
+import { Baskettotal } from "../store/reducer";
+import { useStateValue } from "../store/StateProvider";
 import { useNavigate } from "react-router-dom";
 
 function Subtotal() {
@@ -12,7 +12,6 @@ function Subtotal() {
 
   // check weather user exsist before proceeding to payment
   const userExist = () => {
-
     if (!userName) {
       navigate("/login");
     } else {

@@ -6,20 +6,20 @@ import {
   Badge,
   Button,
   Group,
-  useMantineTheme,
-  Center
+  useMantineTheme
 } from "@mantine/core";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 import { Rating } from "@mui/material";
+
 function ProductCard(props) {
   const theme = useMantineTheme();
+  const [{}, dispatch] = useStateValue();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  const [{}, dispatch] = useStateValue();
 
   // adding to the  basket in reducer so user can view it in the cart
-  const addToBasket = () => {
+  const addToBasket = (e) => {
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
@@ -33,11 +33,11 @@ function ProductCard(props) {
       }
     });
   };
+
   //steps to  access the image through url
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
-  console.log("this is image in card", imageUrl);
 
   return (
     <div

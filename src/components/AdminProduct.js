@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import "../style/AdminProducts.css";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../store/StateProvider";
 import { useNavigate } from "react-router-dom";
 
 

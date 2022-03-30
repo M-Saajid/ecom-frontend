@@ -5,8 +5,8 @@ import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
 import "../style/Payment.css";
 import CheckoutCard from "./CheckoutCard";
-import { Baskettotal } from "./reducer";
-import { useStateValue } from "./StateProvider";
+import { Baskettotal } from "../store/reducer";
+import { useStateValue } from "../store/StateProvider";
 import { useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
 
@@ -22,18 +22,6 @@ function Payment() {
   const [processing, setProcessingd] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
   const [disabled, setDisabled] = useState(true);
-  const handleClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-  const handleOPen = (reason) => {
-    if (reason == "clickaway") {
-    }
-    setOpen(true);
-  };
 
   useEffect(() => {
     //generate stripe sectret allows to charge the customers
@@ -52,6 +40,19 @@ function Payment() {
     };
     getClientSecret();
   }, []);
+
+  const handleClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleOPen = (reason) => {
+    if (reason == "clickaway") {
+    }
+    setOpen(true);
+  };
 
   const handleSubmit = async (event) => {
     //stripe

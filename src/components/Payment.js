@@ -14,7 +14,7 @@ function Payment() {
   const navigate = useNavigate();
   const [{ basket, email }, dispatch] = useStateValue();
   const [open, setOpen] = React.useState(false);
-  const user = localStorage.getItem("user");
+  const token = localStorage.getItem("jwt");
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -42,7 +42,8 @@ function Payment() {
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/payment/create?total=${Baskettotal(
             basket
-          )}`
+          )}`,
+          { headers: { authorization: token } }
         );
         setClientSecret(response.data.clientSecret);
       } else {
@@ -68,12 +69,18 @@ function Payment() {
       setProcessingd(false);
 
       //sent customer email after payment is done
-      console.log("this is user email", email);
+      console.log("this is user tocken", email);
 
-      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/mail`, {
-        Cusemail: email,
-        price: Baskettotal(basket)
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/mail`,
+        {
+          Cusemail: email,
+          price: Baskettotal(basket)
+        },
+        {
+          headers: { authorization: token }
+        }
+      );
 
       // update the stock after to  customer purchase
       {

@@ -30,7 +30,6 @@ function ProductCard(props) {
   const fileUrl = props.image.replace(/\\/g, "/");
   const imageArray = fileUrl.split("/");
   const imageUrl = `${process.env.REACT_APP_BASE_URL}/${imageArray[1]}`;
-  console.log("this is image in card", imageUrl);
 
   return (
     <div

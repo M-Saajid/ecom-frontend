@@ -160,7 +160,7 @@ function Admin() {
                 }}
               />
             </div>
-            <div className="input__Fields">
+            <div className="input__FieldRating">
               <Rating
                 name="rate half-rating"
                 value={values}

@@ -198,7 +198,7 @@ function UpdateCardView() {
           <Rating name="read-only" value={details.rating} readOnly />
         </p>
       </div>
-      <div className="input__Fields">
+      <div className=" input__FieldRating">
         <Typography component="legend">Set Rating </Typography>
         <Rating
           name="rate half-rating"

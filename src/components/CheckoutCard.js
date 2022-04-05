@@ -6,11 +6,11 @@ import {
   Badge,
   Button,
   Group,
-  useMantineTheme,
+  useMantineTheme
 } from "@mantine/core";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useStateValue } from "../store/StateProvider";
-import {  Rating } from "@mui/material";
+import { Rating } from "@mui/material";
 function ProductCard(props) {
   const theme = useMantineTheme();
   const secondaryColor =
@@ -41,11 +41,7 @@ function ProductCard(props) {
     >
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image
-            src="https://5.imimg.com/data5/VB/NM/KZ/SELLER-6129601/man-s-cargo-pant-500x500.jpg"
-            height={160}
-            alt="Norway"
-          />
+          <Image src={imageUrl} height={160} alt="Norway" />
         </Card.Section>
 
         <Group

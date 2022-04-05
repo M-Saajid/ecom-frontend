@@ -6,11 +6,7 @@ export const initialState = {
   //update the bucket according to the user search topic and view it in search ui
   searchBucket: [],
   //update the user
-  user: null,
-  //user email
-  email: null,
-  //search keyword
-  search: null
+  user: null
 };
 // basket total view in cart and purchase
 export const Baskettotal = (basket) =>
@@ -44,9 +40,6 @@ function reducer(state, action) {
     // update the admin update basket dispatch items to that basket
     case "ADD_TO_UPDATES":
       return { ...state, updateBucket: [...state.basket, action.item] };
-    // dispatch items to search basket
-    case "SEARCH":
-      return { ...state, searchBucket: [...state.searchBucket, action.item] };
     // update the user
     case "SET_USER":
       return {

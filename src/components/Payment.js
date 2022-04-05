@@ -12,9 +12,11 @@ import { Alert, Snackbar } from "@mui/material";
 
 function Payment() {
   const navigate = useNavigate();
-  const [{ basket, email }, dispatch] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
   const [open, setOpen] = React.useState(false);
   const token = localStorage.getItem("jwt");
+  const Email = localStorage.getItem("email");
+
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -70,12 +72,12 @@ function Payment() {
       setProcessingd(false);
 
       //sent customer email after payment is done
-      console.log("this is user tocken", email);
+      console.log("this is user tocken", Email);
 
       await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/mail`,
         {
-          Cusemail: email,
+          Cusemail: Email,
           price: Baskettotal(basket)
         },
         {

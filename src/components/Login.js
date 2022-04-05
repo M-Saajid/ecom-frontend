@@ -96,10 +96,9 @@ function Login() {
             username: details.username
           }
         );
-        dispatch({
-          type: "SET_EMAIL",
-          email: results.data.results[0].email
-        });
+
+        console.log("user email", results.data.results[0].email);
+        localStorage.setItem("email", results.data.results[0].email);
 
         navigate("/");
       } catch (error) {

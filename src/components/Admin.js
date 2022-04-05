@@ -22,9 +22,6 @@ function Admin() {
   //handling the image file
   const [files, setFiles] = useState();
 
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

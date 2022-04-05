@@ -26,7 +26,7 @@ function SearchProduct() {
       }
       console.log("this is  results ", searchResults);
     }
-  }, [search]);
+  }, [searchResults]);
 
   return (
     // view all search products

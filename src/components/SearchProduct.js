@@ -6,25 +6,27 @@ import { useStateValue } from "../store/StateProvider";
 function SearchProduct() {
   const [searchResults, setSearcResults] = useState({});
   const search = localStorage.getItem("searchkey");
-  console.log("this is search ", search);
+  const token = localStorage.getItem("jwt");
+
 
   useEffect(async () => {
     //  getting the all items where user search for
-    if (search) {
-      try {
-        const result = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/api/search`,
-          {
-            title: search
-          }
-        );
-        console.log("Search results", result.data.data.foundItems);
-        // updating all the user prefer items to usestate
-        setSearcResults(result.data.data.foundItems);
-      } catch (error) {
-        console.log("this is the error", error);
-      }
-      console.log("this is  results ", searchResults);
+
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/search`,
+        {
+          title: search
+        },
+        {
+          headers: { authorization: token }
+        }
+      );
+
+      // updating all the user prefer items to usestate
+      setSearcResults(result.data.data.foundItems);
+    } catch (error) {
+      console.log("this is the error", error);
     }
   }, [searchResults]);
 

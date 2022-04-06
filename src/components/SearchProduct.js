@@ -8,26 +8,27 @@ function SearchProduct() {
   const search = localStorage.getItem("searchkey");
   const token = localStorage.getItem("jwt");
 
-
-  useEffect(async () => {
+  useEffect(() => {
     //  getting the all items where user search for
+    async function fetchData() {
+      try {
+        const result = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/search`,
+          {
+            title: search
+          },
+          {
+            headers: { authorization: token }
+          }
+        );
 
-    try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/search`,
-        {
-          title: search
-        },
-        {
-          headers: { authorization: token }
-        }
-      );
-
-      // updating all the user prefer items to usestate
-      setSearcResults(result.data.data.foundItems);
-    } catch (error) {
-      console.log("this is the error", error);
+        // updating all the user prefer items to usestate
+        setSearcResults(result.data.data.foundItems);
+      } catch (error) {
+        console.log("this is the error", error);
+      }
     }
+    fetchData();
   }, [searchResults]);
 
   return (
